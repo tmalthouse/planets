@@ -51,7 +51,7 @@ int Darray_append (Darray *arr, void *data)
     return 0;
 }
 
-void free_Sarray (Darray *arr)
+void free_Darray (Darray *arr)
 {
     free (arr->data);
     free (arr);
