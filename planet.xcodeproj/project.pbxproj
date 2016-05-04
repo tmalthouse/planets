@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		E996A5391CD9741A00201CB7 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5381CD9741A00201CB7 /* main.c */; };
-		E996A5461CD9743200201CB7 /* coord.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A53F1CD9743200201CB7 /* coord.c */; };
 		E996A5471CD9743200201CB7 /* darray.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5401CD9743200201CB7 /* darray.c */; };
 		E996A5491CD9743200201CB7 /* planet.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5431CD9743200201CB7 /* planet.c */; };
 		E996A54A1CD9743200201CB7 /* vector2d.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5451CD9743200201CB7 /* vector2d.c */; };
 		E996A54D1CD9871B00201CB7 /* file.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A54B1CD9871B00201CB7 /* file.c */; };
+		E996A5551CDA8B9E00201CB7 /* coord.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5541CDA8B9E00201CB7 /* coord.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,7 +30,6 @@
 /* Begin PBXFileReference section */
 		E996A5351CD9741A00201CB7 /* planet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = planet; sourceTree = BUILT_PRODUCTS_DIR; };
 		E996A5381CD9741A00201CB7 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		E996A53F1CD9743200201CB7 /* coord.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c; fileEncoding = 4; lineEnding = 0; path = coord.c; sourceTree = "<group>"; usesTabs = 0; };
 		E996A5401CD9743200201CB7 /* darray.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = darray.c; sourceTree = "<group>"; };
 		E996A5411CD9743200201CB7 /* darray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = darray.h; sourceTree = "<group>"; };
 		E996A5431CD9743200201CB7 /* planet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = planet.c; sourceTree = "<group>"; };
@@ -42,6 +41,7 @@
 		E996A54F1CD9907600201CB7 /* vector2d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vector2d.h; sourceTree = "<group>"; };
 		E996A5511CD9920200201CB7 /* test_vector2d.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = test_vector2d.c; path = test/test_vector2d.c; sourceTree = "<group>"; };
 		E996A5521CD9920200201CB7 /* test_vector2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = test_vector2d.h; path = test/test_vector2d.h; sourceTree = "<group>"; };
+		E996A5541CDA8B9E00201CB7 /* coord.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = coord.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +76,7 @@
 			children = (
 				E996A5501CD991B600201CB7 /* test */,
 				E996A5381CD9741A00201CB7 /* main.c */,
-				E996A53F1CD9743200201CB7 /* coord.c */,
+				E996A5541CDA8B9E00201CB7 /* coord.c */,
 				E996A5401CD9743200201CB7 /* darray.c */,
 				E996A5411CD9743200201CB7 /* darray.h */,
 				E996A5431CD9743200201CB7 /* planet.c */,
@@ -157,8 +157,8 @@
 			files = (
 				E996A54A1CD9743200201CB7 /* vector2d.c in Sources */,
 				E996A5391CD9741A00201CB7 /* main.c in Sources */,
-				E996A5461CD9743200201CB7 /* coord.c in Sources */,
 				E996A5471CD9743200201CB7 /* darray.c in Sources */,
+				E996A5551CDA8B9E00201CB7 /* coord.c in Sources */,
 				E996A5491CD9743200201CB7 /* planet.c in Sources */,
 				E996A54D1CD9871B00201CB7 /* file.c in Sources */,
 			);
@@ -248,6 +248,7 @@
 				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 			};
 			name = Release;

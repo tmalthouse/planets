@@ -1,5 +1,7 @@
 #include <math.h>
 #include "planet.h"
+#include "vector2d.h"
+#include "coord.h"
 #include "darray.h"
 
 vector2d gforce (cbody a, cbody b)
