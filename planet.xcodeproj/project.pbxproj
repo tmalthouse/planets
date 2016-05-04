@@ -13,6 +13,7 @@
 		E996A5491CD9743200201CB7 /* planet.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5431CD9743200201CB7 /* planet.c */; };
 		E996A54A1CD9743200201CB7 /* vector2d.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5451CD9743200201CB7 /* vector2d.c */; };
 		E996A54D1CD9871B00201CB7 /* file.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A54B1CD9871B00201CB7 /* file.c */; };
+		E996A5531CD9920200201CB7 /* test_vector2d.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5511CD9920200201CB7 /* test_vector2d.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +41,8 @@
 		E996A54C1CD9871B00201CB7 /* file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file.h; sourceTree = "<group>"; };
 		E996A54E1CD9905100201CB7 /* coord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = coord.h; sourceTree = "<group>"; };
 		E996A54F1CD9907600201CB7 /* vector2d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vector2d.h; sourceTree = "<group>"; };
+		E996A5511CD9920200201CB7 /* test_vector2d.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = test_vector2d.c; path = test/test_vector2d.c; sourceTree = "<group>"; };
+		E996A5521CD9920200201CB7 /* test_vector2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = test_vector2d.h; path = test/test_vector2d.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,7 @@
 		E996A5371CD9741A00201CB7 /* planet */ = {
 			isa = PBXGroup;
 			children = (
+				E996A5501CD991B600201CB7 /* test */,
 				E996A5381CD9741A00201CB7 /* main.c */,
 				E996A53F1CD9743200201CB7 /* coord.c */,
 				E996A5401CD9743200201CB7 /* darray.c */,
@@ -85,6 +89,15 @@
 				E996A5451CD9743200201CB7 /* vector2d.c */,
 			);
 			path = planet;
+			sourceTree = "<group>";
+		};
+		E996A5501CD991B600201CB7 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				E996A5511CD9920200201CB7 /* test_vector2d.c */,
+				E996A5521CD9920200201CB7 /* test_vector2d.h */,
+			);
+			name = test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,6 +160,7 @@
 				E996A5391CD9741A00201CB7 /* main.c in Sources */,
 				E996A5461CD9743200201CB7 /* coord.c in Sources */,
 				E996A5471CD9743200201CB7 /* darray.c in Sources */,
+				E996A5531CD9920200201CB7 /* test_vector2d.c in Sources */,
 				E996A5491CD9743200201CB7 /* planet.c in Sources */,
 				E996A54D1CD9871B00201CB7 /* file.c in Sources */,
 			);
