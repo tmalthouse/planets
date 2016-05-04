@@ -13,7 +13,6 @@
 		E996A5491CD9743200201CB7 /* planet.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5431CD9743200201CB7 /* planet.c */; };
 		E996A54A1CD9743200201CB7 /* vector2d.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5451CD9743200201CB7 /* vector2d.c */; };
 		E996A54D1CD9871B00201CB7 /* file.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A54B1CD9871B00201CB7 /* file.c */; };
-		E996A5531CD9920200201CB7 /* test_vector2d.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5511CD9920200201CB7 /* test_vector2d.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -160,7 +159,6 @@
 				E996A5391CD9741A00201CB7 /* main.c in Sources */,
 				E996A5461CD9743200201CB7 /* coord.c in Sources */,
 				E996A5471CD9743200201CB7 /* darray.c in Sources */,
-				E996A5531CD9920200201CB7 /* test_vector2d.c in Sources */,
 				E996A5491CD9743200201CB7 /* planet.c in Sources */,
 				E996A54D1CD9871B00201CB7 /* file.c in Sources */,
 			);

@@ -1,16 +1,15 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <gc/gc.h>
 #include "Darray.h"
 
 Darray *new_Darray (size_t element_size, int initial_count)
 {
-    Darray *arr = GC_MALLOC (sizeof (Darray));
+    Darray *arr = calloc (sizeof (Darray), 1);
     arr->entry_size = element_size;
     arr->len = initial_count;
     arr->cap = initial_count*2;
-    arr->data = GC_MALLOC (element_size * initial_count*2);
+    arr->data = calloc (element_size, initial_count*2);
     if (arr->data != NULL) {
         return arr;
     }
@@ -19,7 +18,7 @@ Darray *new_Darray (size_t element_size, int initial_count)
 
 int Darray_expand (Darray *arr)
 {
-    void *temp = GC_REALLOC (arr->data, arr->cap*2);
+    void *temp = realloc (arr->data, arr->cap*2);
     if (temp != NULL) {
         arr->data = temp;
         return 0;
@@ -50,4 +49,10 @@ int Darray_append (Darray *arr, void *data)
     }
     arr->len++;
     return 0;
+}
+
+void free_Sarray (Darray *arr)
+{
+    free (arr->data);
+    free (arr);
 }
