@@ -2,7 +2,7 @@
 #include "planet.h"
 #include "vector2d.h"
 #include "coord.h"
-#include "darray.h"
+#include "darray_types.h"
 
 vector2d gforce (cbody a, cbody b)
 {
@@ -21,12 +21,11 @@ void addforce (cbody *a, vector2d force)
 /*!
 Sets the net force for each body in an array of cbodies.
 Accepts a pointer to a dynamic array of cbodies.
-Make sure the Darray has the right type--otherwise it'll segfault
-Has O(n^2) speed--Will get slow with lots of bodies
+Has O(n^2) speed--Will get slow with lots of bodies--I'll use a better algorithm eventually
 */
-void calc_forces (Darray *bodies)
+void calc_forces (Darray_cbody *bodies)
 {
-    cbody *planets = (cbody*)(bodies->data);
+    cbody *planets = (bodies->data);
     for (int i=0; i<bodies->len; i++) {
         planets[i].fnet = (vector2d){0, 0};//Set force to 0
         for (int j=0; j<bodies->len; j++) {
@@ -38,12 +37,12 @@ void calc_forces (Darray *bodies)
 }
 
 
-void cbody_update (Darray *bodies, double dt)
+void cbody_update (Darray_cbody *bodies, double dt)
 {
     calc_forces (bodies);
     
     //First, we change each body's velocity, using the forces calculated a line ago
-    cbody *planets = (cbody*)bodies->data;
+    cbody *planets = bodies->data;
     for (int i=0; i<bodies->len; i++) {
         vector2d acc;
         acc = (vector2d){planets[i].fnet.x/planets[i].mass, planets[i].fnet.y/planets[i].mass};

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E996A5391CD9741A00201CB7 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5381CD9741A00201CB7 /* main.c */; };
-		E996A5471CD9743200201CB7 /* darray.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5401CD9743200201CB7 /* darray.c */; };
 		E996A5491CD9743200201CB7 /* planet.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5431CD9743200201CB7 /* planet.c */; };
 		E996A54A1CD9743200201CB7 /* vector2d.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5451CD9743200201CB7 /* vector2d.c */; };
 		E996A54D1CD9871B00201CB7 /* file.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A54B1CD9871B00201CB7 /* file.c */; };
@@ -16,6 +15,7 @@
 		E996A5581CDC305300201CB7 /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5561CDC305300201CB7 /* window.c */; };
 		E996A55A1CDC31CA00201CB7 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E996A5591CDC31CA00201CB7 /* libSDL2-2.0.0.dylib */; };
 		E996A55C1CDC323700201CB7 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E996A55B1CDC323700201CB7 /* libSDL2.a */; };
+		E99985431CDE7A3700967314 /* darray_types.c in Sources */ = {isa = PBXBuildFile; fileRef = E99985411CDE7A3700967314 /* darray_types.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,8 +33,6 @@
 /* Begin PBXFileReference section */
 		E996A5351CD9741A00201CB7 /* planet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = planet; sourceTree = BUILT_PRODUCTS_DIR; };
 		E996A5381CD9741A00201CB7 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		E996A5401CD9743200201CB7 /* darray.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = darray.c; sourceTree = "<group>"; };
-		E996A5411CD9743200201CB7 /* darray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = darray.h; sourceTree = "<group>"; };
 		E996A5431CD9743200201CB7 /* planet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = planet.c; sourceTree = "<group>"; };
 		E996A5441CD9743200201CB7 /* planet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = planet.h; sourceTree = "<group>"; };
 		E996A5451CD9743200201CB7 /* vector2d.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vector2d.c; sourceTree = "<group>"; };
@@ -50,6 +48,9 @@
 		E996A5591CDC31CA00201CB7 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		E996A55B1CDC323700201CB7 /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSDL2.a; sourceTree = "<group>"; };
 		E996A55D1CDC343E00201CB7 /* hello_world.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = hello_world.bmp; sourceTree = "<group>"; };
+		E99985411CDE7A3700967314 /* darray_types.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = darray_types.c; sourceTree = "<group>"; };
+		E99985421CDE7A3700967314 /* darray_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = darray_types.h; sourceTree = "<group>"; };
+		E99985441CDE8C4C00967314 /* cbody.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cbody.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,10 +90,11 @@
 				E996A5501CD991B600201CB7 /* test */,
 				E996A55D1CDC343E00201CB7 /* hello_world.bmp */,
 				E996A5381CD9741A00201CB7 /* main.c */,
+				E99985441CDE8C4C00967314 /* cbody.h */,
 				E996A5541CDA8B9E00201CB7 /* coord.c */,
 				E996A54E1CD9905100201CB7 /* coord.h */,
-				E996A5401CD9743200201CB7 /* darray.c */,
-				E996A5411CD9743200201CB7 /* darray.h */,
+				E99985411CDE7A3700967314 /* darray_types.c */,
+				E99985421CDE7A3700967314 /* darray_types.h */,
 				E996A54B1CD9871B00201CB7 /* file.c */,
 				E996A54C1CD9871B00201CB7 /* file.h */,
 				E996A5431CD9743200201CB7 /* planet.c */,
@@ -172,11 +174,11 @@
 			files = (
 				E996A54A1CD9743200201CB7 /* vector2d.c in Sources */,
 				E996A5391CD9741A00201CB7 /* main.c in Sources */,
-				E996A5471CD9743200201CB7 /* darray.c in Sources */,
 				E996A5581CDC305300201CB7 /* window.c in Sources */,
 				E996A5551CDA8B9E00201CB7 /* coord.c in Sources */,
 				E996A5491CD9743200201CB7 /* planet.c in Sources */,
 				E996A54D1CD9871B00201CB7 /* file.c in Sources */,
+				E99985431CDE7A3700967314 /* darray_types.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

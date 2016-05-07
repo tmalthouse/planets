@@ -17,5 +17,6 @@ typedef struct {
 double vectabs (vector2d a, vector2d b);
 vector2d vectadd (vector2d a, vector2d b);
 vector2d vfmult (vector2d a, double k);
+vector2d atov2d (char *vect);
 
 #endif /* vector2d_h */

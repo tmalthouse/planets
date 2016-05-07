@@ -10,5 +10,9 @@
 #define file_h
 
 #include <stdio.h>
+#include "darray_types.h"
+
+int savesystem (Darray_cbody *bodies, FILE *dest);
+Darray_cbody *loadsystem (FILE *src);
 
 #endif /* file_h */

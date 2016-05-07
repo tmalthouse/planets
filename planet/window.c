@@ -12,6 +12,15 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
+enum KeyPressSurface {
+    KEY_PRESS_SURFACE_DEFAULT,
+    KEY_PRESS_SURFACE_UP,
+    KEY_PRESS_SURFACE_DOWN,
+    KEY_PRESS_SURFACE_LEFT,
+    KEY_PRESS_SURFACE_RIGHT,
+    KEY_PRESS_SURFACE_TOTAL
+};
+
 //Starts up SDL and creates window
 bool init();
 
@@ -112,8 +121,18 @@ int window()
             //Update the surface
             SDL_UpdateWindowSurface( gWindow );
             
-            //Wait two seconds
-            SDL_Delay( 20000 );
+            bool quit = false;
+            
+            SDL_Event e;
+            
+            while (!quit) {
+                while (SDL_PollEvent(&e)!=0) {
+                    SDL_Delay(10);
+                    if (e.type == SDL_QUIT) {
+                        quit = true;
+                    }
+                }
+            }
         }
     }
     
