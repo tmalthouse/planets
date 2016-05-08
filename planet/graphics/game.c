@@ -99,38 +99,57 @@ int rungame(Darray_CBody *system)
     }
     
     dprintf("Len of disp_system is %d\n", disp_system->len);
-    #ifdef DEBUG
+    
     int counter = 0;
-    #endif
+    int updates_per_frame = 30;
+    bool paused = false;
     
     Timer framecontrol = new_timer();
     
     while (!quit) {
         start_timer(&framecontrol);
         
-        dprintf("Starting loop %d.\n", counter++);
+        //dprintf("Starting loop %d.\n", counter);
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 quit = true;
+            } else if (event.type == SDL_KEYDOWN) {
+                switch (event.key.keysym.sym) {
+                    case SDLK_PERIOD:
+                        updates_per_frame+=10;
+                        break;
+                    case SDLK_COMMA:
+                        if (updates_per_frame>=10) {
+                            updates_per_frame-=10;
+                        }
+                        break;
+                    case SDLK_ESCAPE:
+                        paused = !paused;
+                        break;
+                    default:
+                        break;
+                }
+                dprintf("Updates per frame: %d\n", updates_per_frame);
             }
         }
         
-        dprintf("Left event poll\n");
-        cbody_update(system, 1*24*60*60);
-        
+        vdprintf("Left event poll\n"); //Only update if we're not paused
+        for (int i=0; i<updates_per_frame*!paused; i++) {
+            cbody_update(system, ONE_DAY);
+            counter++;
+        }
         
         for (int i=0; i<disp_system->len; i++) {
-            dprintf("Moving sprite %d\n", i);
+            vdprintf("Moving sprite %d\n", i);
             psprite_update(sprite+i);
-            dprintf("The actual coordinates of body %d are (%f, %f)\n", i, body[i].pos.x, body[i].pos.y);
-            dprintf("Its screen coordinates are (%f, %f)\n", sprite[i].screenpos.x, sprite[i].screenpos.y);
+            vdprintf("The actual coordinates of body %d are (%f, %f)\n", i, body[i].pos.x, body[i].pos.y);
+            vdprintf("Its screen coordinates are (%f, %f)\n", sprite[i].screenpos.x, sprite[i].screenpos.y);
         }
         
         SDL_SetRenderDrawColor(components.renderer, 0x00, 0x00, 0x00, 0x00);
         SDL_RenderClear(components.renderer);
         
         for (int i=0; i<disp_system->len; i++) {
-            dprintf("Rendering sprite %d\n",i);
             psprite_render(sprite+i, components.renderer);
         }
         
@@ -138,6 +157,9 @@ int rungame(Darray_CBody *system)
         
         if (get_time(&framecontrol) < 1000/MAX_FPS) {
             SDL_Delay((1000/MAX_FPS) - (uint32_t)get_time(&framecontrol));
+        }
+        if (counter%365==0) {
+            printf("Starting earth year %d.\n", counter/365);
         }
     }
     for (int i=0; i<disp_system->len; i++) {

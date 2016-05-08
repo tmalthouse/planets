@@ -23,5 +23,10 @@ Color hex_color(uint32_t hex)
 
 uint32_t color_hex(Color c)
 {
-    return (c.r<<6)+(c.g<<4)+(c.b<<2);
+    uint32_t hex = 0;
+    uint8_t *hex_ptr = (uint8_t*)&hex;
+    hex_ptr[1] = c.b;
+    hex_ptr[2] = c.g;
+    hex_ptr[3] = c.r;
+    return hex;
 }

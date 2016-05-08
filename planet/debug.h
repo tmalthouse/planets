@@ -9,12 +9,18 @@
 #ifndef debug_h
 #define debug_h
 
-#undef DEBUG
-
 #ifdef DEBUG
 #define dprintf(...) printf(__VA_ARGS__);
 #else
 #define dprintf(...)
+#endif
+
+#undef VERBOSE_DEBUG
+
+#ifdef VERBOSE_DEBUG
+#define vdprintf(...) dprintf(__VA_ARGS__)
+#else
+#define vdprintf(...)
 #endif
 
 #endif /* debug_h */

@@ -16,11 +16,11 @@ SDL_Renderer *g_renderer = NULL;
 int SCREEN_WIDTH = 1000;
 int SCREEN_HEIGHT = 720;
 
-int MAX_FPS = 100;
+int MAX_FPS = 60;
 
 
 /*!
- These crazy functions right here translate space coordinates (the ones found in cbody.pos) to pixel locations for the screen. Calling screencoord (coordinate) actually does the calculation, while screencoord_set(coord) changes the ratio so an item at maxcoord is at the top right corner of the screen in all future calls.
+ These crazy functions right here translate space coordinates (the ones found in CBody.pos) to pixel locations for the screen. Calling screencoord (coordinate) actually does the calculation, while screencoord_set(coord) changes the ratio so an item at maxcoord is at the top right corner of the screen in all future calls.
  */
 
 //Declared static so we don't pollute the namespace. This function should never be called directly, only through the wrappers below.
@@ -31,7 +31,7 @@ static Vector2d sc_core (Vector2d spacecoord, Vector2d maxcoord) {
         long double xratio = SCREEN_WIDTH/(2*maxcoord.x);//0,0 is in the middle of the screen in space coordinates, but in the top left in screen coords.
         long double yratio = SCREEN_HEIGHT/(2*maxcoord.y);
         
-        ratio = ((xratio<yratio)?xratio:yratio)*0.9;//Set the ratio to the smaller of the two, plus a bit of fudge factor.
+        ratio = ((xratio<yratio)?xratio:yratio)*0.75;//Set the ratio to the smaller of the two, plus a bit of fudge factor.
         dprintf("ratio set to %Lf \n", ratio);
         return NULL_VECT;//This bit only gets called when wrappen in a void function anyways.
     }
@@ -40,7 +40,7 @@ static Vector2d sc_core (Vector2d spacecoord, Vector2d maxcoord) {
     Vector2d screencoord = {((float)SCREEN_WIDTH/2)+spacecoord.x*ratio,
         ((float)SCREEN_HEIGHT/2)+spacecoord.y*ratio};
     
-    dprintf("screen x: %f, screen y: %f\n", screencoord.x, screencoord.y);
+    vdprintf("screen x: %f, screen y: %f\n", screencoord.x, screencoord.y);
     return screencoord;
 }
 

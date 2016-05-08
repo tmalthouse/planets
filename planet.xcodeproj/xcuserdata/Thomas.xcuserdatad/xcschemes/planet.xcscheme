@@ -63,7 +63,11 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "&quot;/Users/Thomas/Desktop/system.sys&quot;"
+            argument = "/Users/Thomas/Desktop/system.sys"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "demo"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

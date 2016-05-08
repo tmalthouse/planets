@@ -30,11 +30,11 @@ void calc_forces (Darray_CBody *bodies)
         planets[i].fnet = (Vector2d){0, 0};//Set force to 0
         for (int j=0; j<bodies->len; j++) {
             if (i!=j) {//We really don't want to calc force to ourself--div/0 error
-                dprintf("Force on body %s from body %s is %f\n", planets[i].name, planets[j].name, vectabs(gforce(planets[i], planets[j]), (Vector2d){0,0}))
+                vdprintf("Force on body %s from body %s is %f\n", planets[i].name, planets[j].name, vectabs(gforce(planets[i], planets[j]), (Vector2d){0,0}))
                 addforce (planets+i, gforce(planets[i], planets[j]));
             }
         }
-        dprintf("Net force on body %s is %f\n", planets[i].name, vectabs(planets[i].fnet, (Vector2d){0,0}));
+        vdprintf("Net force on body %s is %f\n", planets[i].name, vectabs(planets[i].fnet, (Vector2d){0,0}));
 
     }
 }

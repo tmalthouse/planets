@@ -17,14 +17,14 @@ Texture *load_texture(char *path, SDL_Renderer *renderer)
     
     if (loaded_surface == NULL) {
         fprintf(stderr, "Can't load texture %s. SDL Error %s.\n", path, IMG_GetError());
-        return NULL;
+        goto error;
     }
     
     SDL_SetColorKey(loaded_surface, SDL_TRUE, SDL_MapRGB(loaded_surface->format, 0xFF, 0xFF, 0xFF));
     new_text = SDL_CreateTextureFromSurface(renderer, loaded_surface);
     if (new_text == NULL) {
         fprintf(stderr, "Can't create texture from %s. SDL error %s.\n", path, SDL_GetError());
-        return NULL;
+        goto error;
     }
     
     tex->texture = new_text;
@@ -32,6 +32,10 @@ Texture *load_texture(char *path, SDL_Renderer *renderer)
     tex->height = loaded_surface->h;
     SDL_FreeSurface(loaded_surface);
     return tex;
+    
+    error:
+    free(tex);
+    return NULL;
 }
 
 void free_texture(Texture *t)
@@ -59,8 +63,6 @@ void texture_set_alpha(Texture *t, uint8_t a)
 
 void render_texture(Texture *t, Coordinate pos, SDL_Renderer *renderer, SDL_Rect *clip, double angle, SDL_Point *center, SDL_RendererFlip flip)
 {
-    dprintf("Texture t h: %d, w: %d\n", t->height, t->width);
-    dprintf("address of t is %p\n", t);
     SDL_Rect render_quad = {pos.x, pos.y, t->width, t->height};
     render_quad.x = pos.x;
     render_quad.y = pos.y;
