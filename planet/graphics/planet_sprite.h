@@ -18,6 +18,7 @@
 typedef struct {
     CBody *rootbody;
     Texture *texture;
+    Texture *label;
     int width;
     int height;
     Coordinate screenpos;
@@ -27,6 +28,7 @@ typedef struct {
 PSprite new_psprite();
 void psprite_update(PSprite *planet);
 void psprite_render(PSprite *planet, SDL_Renderer *renderer);
+void render_labels (Darray_PSprite *bodies, Coordinate mousepos, SDL_Renderer *renderer);
 
 
 #endif /* planet_sprite_h */

@@ -33,8 +33,37 @@ Texture *load_texture(char *path, SDL_Renderer *renderer)
     SDL_FreeSurface(loaded_surface);
     return tex;
     
-    error:
+error:
     free(tex);
+    return NULL;
+}
+
+Texture *create_label (char *str, Color c, TTF_Font *f, SDL_Renderer *renderer)
+{
+    Texture *basetex = calloc(sizeof(Texture), 1);
+    
+    SDL_Surface *text_surf = TTF_RenderText_Blended(f, str, (SDL_Color){c.r, c.g, c.b});
+    if (text_surf == NULL) {
+        fprintf(stderr, "Can't render text! SDL error :%s\n", TTF_GetError());
+        goto error;
+    }
+    
+    basetex->texture = SDL_CreateTextureFromSurface(renderer, text_surf);
+    if (basetex->texture == NULL) {
+        fprintf(stderr, "Can't convert string into texture! SDL error: %s\n", SDL_GetError());
+        goto error;
+    }
+    
+    basetex->width = text_surf->w;
+    basetex->height = text_surf->h;
+    
+    free(text_surf);
+    return basetex;
+    
+    
+error:
+    free (text_surf);
+    free(basetex);
     return NULL;
 }
 

@@ -14,6 +14,7 @@
 #include <stdint.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include "window.h"
 #include "../color.h"
 #include "../coord.h"
@@ -27,6 +28,7 @@ typedef struct {
 } Texture;
 
 Texture *load_texture (char *path, SDL_Renderer *renderer);
+Texture *create_label (char *str, Color c, TTF_Font *f, SDL_Renderer *renderer);
 void free_texture(Texture *t);
 void texture_set_color(Texture *t, Color c);
 void texture_set_blend_mode(Texture *t, SDL_BlendMode blend);

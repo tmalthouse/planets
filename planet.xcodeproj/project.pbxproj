@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E99268FF1CDF80CF00143E9B /* color.c in Sources */ = {isa = PBXBuildFile; fileRef = E99268FD1CDF80CF00143E9B /* color.c */; };
 		E99269021CDFAAB300143E9B /* timer.c in Sources */ = {isa = PBXBuildFile; fileRef = E99269001CDFAAB300143E9B /* timer.c */; };
+		E99269071CDFF53600143E9B /* libSDL2_ttf-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E99269061CDFF53600143E9B /* libSDL2_ttf-2.0.0.dylib */; };
 		E996A5391CD9741A00201CB7 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5381CD9741A00201CB7 /* main.c */; };
 		E996A5491CD9743200201CB7 /* planet.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5431CD9743200201CB7 /* planet.c */; };
 		E996A54A1CD9743200201CB7 /* vector2d.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5451CD9743200201CB7 /* vector2d.c */; };
@@ -40,6 +41,7 @@
 		E99268FE1CDF80CF00143E9B /* color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = color.h; sourceTree = "<group>"; };
 		E99269001CDFAAB300143E9B /* timer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = timer.c; path = graphics/timer.c; sourceTree = "<group>"; };
 		E99269011CDFAAB300143E9B /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = timer.h; path = graphics/timer.h; sourceTree = "<group>"; };
+		E99269061CDFF53600143E9B /* libSDL2_ttf-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_ttf-2.0.0.dylib"; path = "../../../../../usr/local/Cellar/sdl2_ttf/2.0.13/lib/libSDL2_ttf-2.0.0.dylib"; sourceTree = "<group>"; };
 		E996A5351CD9741A00201CB7 /* planet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = planet; sourceTree = BUILT_PRODUCTS_DIR; };
 		E996A5381CD9741A00201CB7 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		E996A5431CD9743200201CB7 /* planet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = planet.c; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E99269071CDFF53600143E9B /* libSDL2_ttf-2.0.0.dylib in Frameworks */,
 				E999855A1CDEC69700967314 /* libSDL2_image-2.0.0.dylib in Frameworks */,
 				E99985581CDEC67E00967314 /* libSDL2-2.0.0.dylib in Frameworks */,
 			);
@@ -84,6 +87,7 @@
 		E996A52C1CD9741A00201CB7 = {
 			isa = PBXGroup;
 			children = (
+				E99269061CDFF53600143E9B /* libSDL2_ttf-2.0.0.dylib */,
 				E99985591CDEC69700967314 /* libSDL2_image-2.0.0.dylib */,
 				E99985571CDEC67E00967314 /* libSDL2-2.0.0.dylib */,
 				E996A5371CD9741A00201CB7 /* planet */,
@@ -318,6 +322,7 @@
 					"$(PROJECT_DIR)/planet",
 					/usr/local/Cellar/sdl2/2.0.4/lib,
 					/usr/local/Cellar/sdl2_image/2.0.1/lib,
+					/usr/local/Cellar/sdl2_ttf/2.0.13/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -332,6 +337,7 @@
 					"$(PROJECT_DIR)/planet",
 					/usr/local/Cellar/sdl2/2.0.4/lib,
 					/usr/local/Cellar/sdl2_image/2.0.1/lib,
+					/usr/local/Cellar/sdl2_ttf/2.0.13/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

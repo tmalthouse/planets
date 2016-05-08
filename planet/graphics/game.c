@@ -37,7 +37,7 @@ ScreenComponents startgame()
         return (ScreenComponents){false, NULL, NULL};
     }
     
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);//For some reason, the flags aren't working.
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     
     if (renderer == NULL) {
         fprintf(stderr, "Couldn't create a renderer. Error: %s\n", SDL_GetError());
@@ -90,18 +90,24 @@ int rungame(Darray_CBody *system)
     dprintf("Darray_PSprite *created. Initial len is %d, cap is %d\n.", disp_system->len, disp_system->cap);
     screencoord_set(absmaxpos(system));
     
+    TTF_Init();
+    TTF_Font *lbl_font = TTF_OpenFont("/Users/Thomas/Library/Fonts/Consolas.ttf", 12);
+    
     dprintf("Filling disp_system.\n");
     for (int i=0; i<system->len; i++) {
         Texture *tex = load_texture("/Users/Thomas/Desktop/planet.bmp", components.renderer);
         texture_set_color(tex, body[i].color);
         darray_append_PSprite(disp_system, new_psprite(body+i, tex));
         dprintf("Filled index %d. Name is %s\n", i, sprite[i].rootbody->name);
+        
+        tex = create_label(body[i].name, body[i].color, lbl_font, components.renderer);
+        disp_system->data[i].label = tex;
     }
     
     dprintf("Len of disp_system is %d\n", disp_system->len);
     
     int counter = 0;
-    int updates_per_frame = 30;
+    int updates_per_frame = 20;
     bool paused = false;
     
     Timer framecontrol = new_timer();
@@ -152,6 +158,10 @@ int rungame(Darray_CBody *system)
         for (int i=0; i<disp_system->len; i++) {
             psprite_render(sprite+i, components.renderer);
         }
+        
+        int x, y;
+        SDL_GetMouseState(&x, &y);
+        render_labels(disp_system, (Coordinate){x, y}, components.renderer);
         
         SDL_RenderPresent(components.renderer);
         
