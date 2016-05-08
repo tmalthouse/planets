@@ -59,6 +59,7 @@
 		E999855C1CDEC86A00967314 /* planet_sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = planet_sprite.h; path = graphics/planet_sprite.h; sourceTree = "<group>"; };
 		E99985611CDED75000967314 /* game.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = game.c; path = graphics/game.c; sourceTree = "<group>"; };
 		E99985621CDED75000967314 /* game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = game.h; path = graphics/game.h; sourceTree = "<group>"; };
+		E99985641CDEEAC900967314 /* debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +101,7 @@
 				E99985441CDE8C4C00967314 /* cbody.h */,
 				E996A5541CDA8B9E00201CB7 /* coord.c */,
 				E996A54E1CD9905100201CB7 /* coord.h */,
+				E99985641CDEEAC900967314 /* debug.h */,
 				E996A5381CD9741A00201CB7 /* main.c */,
 				E99985411CDE7A3700967314 /* darray_types.c */,
 				E99985421CDE7A3700967314 /* darray_types.h */,

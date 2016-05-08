@@ -13,6 +13,7 @@
 #include "window.h"
 #include "texture.h"
 #include "planet_sprite.h"
+#include "../debug.h"
 #include "../darray_types.h"
 #include "../cbody.h"
 #include "../planet.h"
@@ -95,17 +96,18 @@ int rungame(Darray_CBody *system)
                 quit = true;
             }
         }
+        
         cbody_update(system, 1);
         
         for (int i=0; i<disp_system->len; i++) {
-            psprite_move(&sprite[i]);
+            psprite_move(sprite+i);
         }
         
         SDL_SetRenderDrawColor(components.renderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(components.renderer);
         
         for (int i=0; i<disp_system->len; i++) {
-            psprite_render(&sprite[i], components.renderer);
+            psprite_render(sprite+i, components.renderer);
         }
         
         SDL_RenderPresent(components.renderer);
