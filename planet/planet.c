@@ -54,3 +54,21 @@ void cbody_update (Darray_cbody *bodies, double dt)
         planets[i].pos = vectadd(planets[i].pos, vfmult(planets[i].vel, dt));
     }
 }
+
+coordinate absmaxpos (Darray_cbody *bodies) {
+    vector2d max = {0, 0};
+    
+    cbody *planets = bodies->data;
+    for (int i=0; i<bodies->len; i++) {
+        double x = fabs(planets[i].pos.x);
+        double y = fabs(planets[i].pos.y);
+        
+        if (x>max.x) {
+            max.x = x;
+        }
+        if (y>max.y) {
+            max.y = y;
+        }
+    }
+    return max;
+}

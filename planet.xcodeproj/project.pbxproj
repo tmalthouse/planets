@@ -12,10 +12,11 @@
 		E996A54A1CD9743200201CB7 /* vector2d.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5451CD9743200201CB7 /* vector2d.c */; };
 		E996A54D1CD9871B00201CB7 /* file.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A54B1CD9871B00201CB7 /* file.c */; };
 		E996A5551CDA8B9E00201CB7 /* coord.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5541CDA8B9E00201CB7 /* coord.c */; };
-		E996A5581CDC305300201CB7 /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5561CDC305300201CB7 /* window.c */; };
-		E996A55A1CDC31CA00201CB7 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E996A5591CDC31CA00201CB7 /* libSDL2-2.0.0.dylib */; };
-		E996A55C1CDC323700201CB7 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E996A55B1CDC323700201CB7 /* libSDL2.a */; };
 		E99985431CDE7A3700967314 /* darray_types.c in Sources */ = {isa = PBXBuildFile; fileRef = E99985411CDE7A3700967314 /* darray_types.c */; };
+		E99985501CDEBB2300967314 /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = E999854E1CDEBB2300967314 /* window.c */; };
+		E99985531CDEBBC600967314 /* texture.c in Sources */ = {isa = PBXBuildFile; fileRef = E99985511CDEBBC600967314 /* texture.c */; };
+		E99985581CDEC67E00967314 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E99985571CDEC67E00967314 /* libSDL2-2.0.0.dylib */; };
+		E999855A1CDEC69700967314 /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E99985591CDEC69700967314 /* libSDL2_image-2.0.0.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,14 +44,15 @@
 		E996A5511CD9920200201CB7 /* test_vector2d.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = test_vector2d.c; path = test/test_vector2d.c; sourceTree = "<group>"; };
 		E996A5521CD9920200201CB7 /* test_vector2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = test_vector2d.h; path = test/test_vector2d.h; sourceTree = "<group>"; };
 		E996A5541CDA8B9E00201CB7 /* coord.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = coord.c; sourceTree = "<group>"; };
-		E996A5561CDC305300201CB7 /* window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = window.c; sourceTree = "<group>"; };
-		E996A5571CDC305300201CB7 /* window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = window.h; sourceTree = "<group>"; };
-		E996A5591CDC31CA00201CB7 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
-		E996A55B1CDC323700201CB7 /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSDL2.a; sourceTree = "<group>"; };
-		E996A55D1CDC343E00201CB7 /* hello_world.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = hello_world.bmp; sourceTree = "<group>"; };
 		E99985411CDE7A3700967314 /* darray_types.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = darray_types.c; sourceTree = "<group>"; };
 		E99985421CDE7A3700967314 /* darray_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = darray_types.h; sourceTree = "<group>"; };
 		E99985441CDE8C4C00967314 /* cbody.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cbody.h; sourceTree = "<group>"; };
+		E999854E1CDEBB2300967314 /* window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = window.c; path = graphics/window.c; sourceTree = "<group>"; };
+		E999854F1CDEBB2300967314 /* window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = window.h; path = graphics/window.h; sourceTree = "<group>"; };
+		E99985511CDEBBC600967314 /* texture.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = texture.c; path = graphics/texture.c; sourceTree = "<group>"; };
+		E99985521CDEBBC600967314 /* texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = texture.h; path = graphics/texture.h; sourceTree = "<group>"; };
+		E99985571CDEC67E00967314 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../../usr/local/Cellar/sdl2/2.0.4/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
+		E99985591CDEC69700967314 /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "../../../../../usr/local/Cellar/sdl2_image/2.0.1/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +60,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E996A55C1CDC323700201CB7 /* libSDL2.a in Frameworks */,
-				E996A55A1CDC31CA00201CB7 /* libSDL2-2.0.0.dylib in Frameworks */,
+				E999855A1CDEC69700967314 /* libSDL2_image-2.0.0.dylib in Frameworks */,
+				E99985581CDEC67E00967314 /* libSDL2-2.0.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,8 +71,8 @@
 		E996A52C1CD9741A00201CB7 = {
 			isa = PBXGroup;
 			children = (
-				E996A55B1CDC323700201CB7 /* libSDL2.a */,
-				E996A5591CDC31CA00201CB7 /* libSDL2-2.0.0.dylib */,
+				E99985591CDEC69700967314 /* libSDL2_image-2.0.0.dylib */,
+				E99985571CDEC67E00967314 /* libSDL2-2.0.0.dylib */,
 				E996A5371CD9741A00201CB7 /* planet */,
 				E996A5361CD9741A00201CB7 /* Products */,
 			);
@@ -88,11 +90,11 @@
 			isa = PBXGroup;
 			children = (
 				E996A5501CD991B600201CB7 /* test */,
-				E996A55D1CDC343E00201CB7 /* hello_world.bmp */,
-				E996A5381CD9741A00201CB7 /* main.c */,
+				E999854D1CDEBB1500967314 /* graphics */,
 				E99985441CDE8C4C00967314 /* cbody.h */,
 				E996A5541CDA8B9E00201CB7 /* coord.c */,
 				E996A54E1CD9905100201CB7 /* coord.h */,
+				E996A5381CD9741A00201CB7 /* main.c */,
 				E99985411CDE7A3700967314 /* darray_types.c */,
 				E99985421CDE7A3700967314 /* darray_types.h */,
 				E996A54B1CD9871B00201CB7 /* file.c */,
@@ -101,8 +103,6 @@
 				E996A5441CD9743200201CB7 /* planet.h */,
 				E996A5451CD9743200201CB7 /* vector2d.c */,
 				E996A54F1CD9907600201CB7 /* vector2d.h */,
-				E996A5561CDC305300201CB7 /* window.c */,
-				E996A5571CDC305300201CB7 /* window.h */,
 			);
 			path = planet;
 			sourceTree = "<group>";
@@ -114,6 +114,17 @@
 				E996A5521CD9920200201CB7 /* test_vector2d.h */,
 			);
 			name = test;
+			sourceTree = "<group>";
+		};
+		E999854D1CDEBB1500967314 /* graphics */ = {
+			isa = PBXGroup;
+			children = (
+				E999854E1CDEBB2300967314 /* window.c */,
+				E999854F1CDEBB2300967314 /* window.h */,
+				E99985511CDEBBC600967314 /* texture.c */,
+				E99985521CDEBBC600967314 /* texture.h */,
+			);
+			name = graphics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,8 +185,9 @@
 			files = (
 				E996A54A1CD9743200201CB7 /* vector2d.c in Sources */,
 				E996A5391CD9741A00201CB7 /* main.c in Sources */,
-				E996A5581CDC305300201CB7 /* window.c in Sources */,
 				E996A5551CDA8B9E00201CB7 /* coord.c in Sources */,
+				E99985531CDEBBC600967314 /* texture.c in Sources */,
+				E99985501CDEBB2300967314 /* window.c in Sources */,
 				E996A5491CD9743200201CB7 /* planet.c in Sources */,
 				E996A54D1CD9871B00201CB7 /* file.c in Sources */,
 				E99985431CDE7A3700967314 /* darray_types.c in Sources */,
@@ -277,6 +289,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/planet",
+					/usr/local/Cellar/sdl2/2.0.4/lib,
+					/usr/local/Cellar/sdl2_image/2.0.1/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -288,6 +303,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/planet",
+					/usr/local/Cellar/sdl2/2.0.4/lib,
+					/usr/local/Cellar/sdl2_image/2.0.1/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

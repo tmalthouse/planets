@@ -21,3 +21,8 @@ vector2d atov2d (char *vect) {
     char *delim = strchr(vect, ',');
     return (vector2d){atof(start+1),atof(delim+1)};
 }
+
+bool vect_eq (vector2d a, vector2d b)
+{
+    return (a.x==b.x)&&(a.y==b.y);
+}
