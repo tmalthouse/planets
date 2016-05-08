@@ -16,9 +16,9 @@ typedef struct {
     char name[20];
     double mass;
     double radius;
-    vector2d vel;
-    vector2d fnet;
-    coordinate pos;
-} cbody;
+    Vector2d vel;
+    Vector2d fnet;
+    Coordinate pos;
+} CBody;
 
 #endif /* cbody_h */

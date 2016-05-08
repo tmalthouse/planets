@@ -14,8 +14,8 @@
 SDL_Renderer *g_renderer = NULL;
 
 //I'm comfortable declaring the screen dims (but not the system maxcoords) as global, since there's always only one screen per program instance, but potentially multiple systems simultaneously at some point.
-int SCREEN_WIDTH = 1080;
-int SCREEN_HEIGHT = 720;
+int SCREEN_WIDTH = 300;
+int SCREEN_HEIGHT = 300;
 
 
 /*!
@@ -23,7 +23,7 @@ int SCREEN_HEIGHT = 720;
  */
 
 //Declared static so we don't pollute the namespace. This function should never be called directly, only through the wrappers below.
-static vector2d sc_core (vector2d spacecoord, vector2d maxcoord) {
+static Vector2d sc_core (Vector2d spacecoord, Vector2d maxcoord) {
     static double ratio = NAN;//We want the ratio to persist over multiple calls--a bit like a closure but we only need one.
     
     if (!vect_eq(maxcoord, NULL_VECT)) {//The only time this bit should be called is if we're calling screencoord_set
@@ -34,18 +34,19 @@ static vector2d sc_core (vector2d spacecoord, vector2d maxcoord) {
         return NULL_VECT;//This bit only gets called when wrappen in a void function anyways.
     }
     
-    vector2d screencoord = {((float)SCREEN_WIDTH/2)+spacecoord.x*ratio,
+    Vector2d screencoord = {((float)SCREEN_WIDTH/2)+spacecoord.x*ratio,
         ((float)SCREEN_HEIGHT/2)+spacecoord.y*ratio};
     
+    printf("screen x: %f, screen y: %f\n", screencoord.x, screencoord.y);
     return screencoord;
 }
 
-vector2d screencoord (vector2d spacecoord)
+Vector2d screencoord (Vector2d spacecoord)
 {
     return sc_core(spacecoord, NULL_VECT);
 }
 
-void screencoord_set (vector2d absmax)
+void screencoord_set (Vector2d absmax)
 {
     sc_core(NULL_VECT, absmax);
 }

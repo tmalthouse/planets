@@ -17,7 +17,7 @@
 #include "window.h"
 #include "../coord.h"
 
-#define RENDER_DEFAULT_ARGS = NULL, 0.0, NULL, SDL_FLIP_NONE
+#define RENDER_DEFAULT_ARGS NULL, 0.0, NULL, SDL_FLIP_NONE
 
 typedef struct {
     SDL_Texture *texture;
@@ -25,12 +25,12 @@ typedef struct {
     int width;
 } Texture;
 
-Texture *load_texture (char *path);
+Texture *load_texture (char *path, SDL_Renderer *renderer);
 void free_texture(Texture *t);
 void texture_set_color(Texture *t, uint8_t r, uint8_t g, uint8_t b);
 void texture_set_blend_mode(Texture *t, SDL_BlendMode blend);
 void texture_set_alpha(Texture *t, uint8_t alpha);
-void render_texture(Texture *t, coordinate pos, SDL_Rect *clip, double angle, SDL_Point *center, SDL_RendererFlip flip);
+void render_texture(Texture *t, Coordinate pos, SDL_Renderer *renderer, SDL_Rect *clip, double angle, SDL_Point *center, SDL_RendererFlip flip);
 
 
 #endif /* texture_h */

@@ -8,7 +8,7 @@
 
 #include "texture.h"
 
-Texture *load_texture(char *path)
+Texture *load_texture(char *path, SDL_Renderer *renderer)
 {
     Texture *tex = calloc(sizeof(Texture), 1);
     
@@ -21,7 +21,7 @@ Texture *load_texture(char *path)
     }
     
     SDL_SetColorKey(loaded_surface, SDL_TRUE, SDL_MapRGB(loaded_surface->format, 0xFF, 0xFF, 0xFF));
-    new_text = SDL_CreateTextureFromSurface(g_renderer, loaded_surface);
+    new_text = SDL_CreateTextureFromSurface(renderer, loaded_surface);
     if (new_text == NULL) {
         fprintf(stderr, "Can't create texture from %s. SDL error %s.\n", path, SDL_GetError());
         return NULL;
@@ -56,7 +56,7 @@ void texture_set_alpha(Texture *t, uint8_t a)
     SDL_SetTextureAlphaMod(t->texture, a);
 }
 
-void render_texture(Texture *t, coordinate pos, SDL_Rect *clip, double angle, SDL_Point *center, SDL_RendererFlip flip)
+void render_texture(Texture *t, Coordinate pos, SDL_Renderer *renderer, SDL_Rect *clip, double angle, SDL_Point *center, SDL_RendererFlip flip)
 {
     SDL_Rect render_quad = {pos.x, pos.y, t->width, t->height};
     
@@ -64,5 +64,5 @@ void render_texture(Texture *t, coordinate pos, SDL_Rect *clip, double angle, SD
         render_quad.w = clip->w;
         render_quad.h = clip->h;
     }
-    SDL_RenderCopyEx(g_renderer, t->texture, clip, &render_quad, angle, center, flip);
+    SDL_RenderCopyEx(renderer, t->texture, clip, &render_quad, angle, center, flip);
 }

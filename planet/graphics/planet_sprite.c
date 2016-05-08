@@ -10,18 +10,22 @@
 #include <stdlib.h>
 #include "window.h"
 
-PSprite *new_psprite(cbody *body, Texture *tex)
+PSprite new_psprite(CBody *body, Texture *tex)
 {
-    PSprite *planet = calloc (sizeof(PSprite), 1);
-    planet->rootbody = body;
-    planet->texture = tex;
-    planet->width = 5;
-    planet->height = 5;
-    planet->screenpos = screencoord(body->pos);
-    planet->screenvel = screencoord(body->vel);
+    PSprite planet;
+    planet.rootbody = body;
+    planet.texture = tex;
+    planet.width = 5;
+    planet.height = 5;
+    planet.screenpos = screencoord(body->pos);
+    planet.screenvel = screencoord(body->vel);
     return planet;
 }
 
 void psprite_move(PSprite *planet) {
     planet->screenpos = screencoord(planet->rootbody->pos);
+}
+
+void psprite_render(PSprite *planet, SDL_Renderer *renderer) {
+    render_texture(planet->texture, planet->screenpos, renderer, RENDER_DEFAULT_ARGS);
 }

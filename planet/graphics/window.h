@@ -17,8 +17,14 @@ extern int SCREEN_WIDTH;
 extern int SCREEN_HEIGHT;
 extern SDL_Renderer *g_renderer;
 
-vector2d screencoord (vector2d spacecoord);
-void screencoord_set (vector2d maxcoord);
+typedef struct {
+    bool status;
+    SDL_Window *window;
+    SDL_Renderer *renderer;
+} ScreenComponents;
+
+Vector2d screencoord (Vector2d spacecoord);
+void screencoord_set (Vector2d maxcoord);
 
 
 #endif /* window_h */

@@ -10,10 +10,10 @@
 
 
 /*cbody function headers*/
-vector2d gforce (cbody a, cbody b);
-void addforce (cbody *a, vector2d force);
-void calc_forces (Darray_cbody *bodies);
-void cbody_update (Darray_cbody *bodies, double dt);
-coordinate absmaxpos (Darray_cbody *bodies);
+Vector2d gforce (CBody a, CBody b);
+void addforce (CBody *a, Vector2d force);
+void calc_forces (Darray_CBody *bodies);
+void cbody_update (Darray_CBody *bodies, double dt);
+Coordinate absmaxpos (Darray_CBody *bodies);
 
 #endif /* end of include guard: PLANET_STRUCTS */

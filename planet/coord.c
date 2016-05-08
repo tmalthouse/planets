@@ -10,19 +10,19 @@
 #include <math.h>
 #include "planet.h"
 
-void setpos (coordinate *c, int x, int y)
+void setpos (Coordinate *c, int x, int y)
 {
     c->x = x;
     c->y = y;
 }
 
-void changepos (coordinate *c, int x, int y)
+void changepos (Coordinate *c, int x, int y)
 {
     c->x+=x;
     c->y+=y;
 }
 
-double absdist (coordinate a, coordinate b)
+double absdist (Coordinate a, Coordinate b)
 {
     return vectabs (a, b);
 }

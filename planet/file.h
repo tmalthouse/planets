@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "darray_types.h"
 
-int savesystem (Darray_cbody *bodies, FILE *dest);
-Darray_cbody *loadsystem (FILE *src);
+int savesystem (Darray_CBody *bodies, FILE *dest);
+Darray_CBody *loadsystem (FILE *src);
 
 #endif /* file_h */

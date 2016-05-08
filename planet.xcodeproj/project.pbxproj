@@ -18,6 +18,7 @@
 		E99985581CDEC67E00967314 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E99985571CDEC67E00967314 /* libSDL2-2.0.0.dylib */; };
 		E999855A1CDEC69700967314 /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E99985591CDEC69700967314 /* libSDL2_image-2.0.0.dylib */; };
 		E999855D1CDEC86A00967314 /* planet_sprite.c in Sources */ = {isa = PBXBuildFile; fileRef = E999855B1CDEC86A00967314 /* planet_sprite.c */; };
+		E99985631CDED75000967314 /* game.c in Sources */ = {isa = PBXBuildFile; fileRef = E99985611CDED75000967314 /* game.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,7 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E996A5351CD9741A00201CB7 /* planet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = planet; sourceTree = BUILT_PRODUCTS_DIR; };
+		E996A5351CD9741A00201CB7 /* planet */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.executable"; path = planet; sourceTree = BUILT_PRODUCTS_DIR; };
 		E996A5381CD9741A00201CB7 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		E996A5431CD9743200201CB7 /* planet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = planet.c; sourceTree = "<group>"; };
 		E996A5441CD9743200201CB7 /* planet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = planet.h; sourceTree = "<group>"; };
@@ -56,6 +57,8 @@
 		E99985591CDEC69700967314 /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "../../../../../usr/local/Cellar/sdl2_image/2.0.1/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
 		E999855B1CDEC86A00967314 /* planet_sprite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = planet_sprite.c; path = graphics/planet_sprite.c; sourceTree = "<group>"; };
 		E999855C1CDEC86A00967314 /* planet_sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = planet_sprite.h; path = graphics/planet_sprite.h; sourceTree = "<group>"; };
+		E99985611CDED75000967314 /* game.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = game.c; path = graphics/game.c; sourceTree = "<group>"; };
+		E99985621CDED75000967314 /* game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = game.h; path = graphics/game.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,8 @@
 				E99985511CDEBBC600967314 /* texture.c */,
 				E99985521CDEBBC600967314 /* texture.h */,
 				E999855B1CDEC86A00967314 /* planet_sprite.c */,
+				E99985611CDED75000967314 /* game.c */,
+				E99985621CDED75000967314 /* game.h */,
 				E999855C1CDEC86A00967314 /* planet_sprite.h */,
 			);
 			name = graphics;
@@ -193,6 +198,7 @@
 				E999855D1CDEC86A00967314 /* planet_sprite.c in Sources */,
 				E996A5551CDA8B9E00201CB7 /* coord.c in Sources */,
 				E99985531CDEBBC600967314 /* texture.c in Sources */,
+				E99985631CDED75000967314 /* game.c in Sources */,
 				E99985501CDEBB2300967314 /* window.c in Sources */,
 				E996A5491CD9743200201CB7 /* planet.c in Sources */,
 				E996A54D1CD9871B00201CB7 /* file.c in Sources */,

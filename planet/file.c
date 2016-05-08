@@ -13,9 +13,9 @@
 #include "planet.h"
 #include "darray_types.h"
 
-int savesystem (Darray_cbody *bodies, FILE *dest)
+int savesystem (Darray_CBody *bodies, FILE *dest)
 {
-    cbody *sys = (cbody*)(bodies->data);
+    CBody *sys = (CBody*)(bodies->data);
     fprintf(dest, "SIZE:%d", bodies->len);
     for (int i=0; i<bodies->len; i++){
         fprintf(dest, "BODY{\n");
@@ -30,9 +30,9 @@ int savesystem (Darray_cbody *bodies, FILE *dest)
     return 0;
 }
 
-cbody loadbody (char *bodydef)
+CBody loadbody (char *bodydef)
 {
-    cbody result;
+    CBody result;
     
     //Do the name
     char *name = strchr(bodydef, ':');//Find the start of "name"
@@ -60,9 +60,9 @@ cbody loadbody (char *bodydef)
     return result;
 }
 
-Darray_cbody *loadsystem (FILE *src)
+Darray_CBody *loadsystem (FILE *src)
 {
-    Darray_cbody *sys = new_darray_cbody(10);
+    Darray_CBody *sys = new_darray_CBody(10);
     
     //Find the size of the file in bytes
     fseek (src, 0L, SEEK_END);
@@ -76,7 +76,7 @@ Darray_cbody *loadsystem (FILE *src)
     //Load bodies, delimiting on { tokens
     char *body = strchr(buf, '{')+1;
     while (body!=NULL) {
-        darray_append_cbody(sys, loadbody(body));
+        darray_append_CBody(sys, loadbody(body));
         body = strchr(body, '{')+1;
     }
     

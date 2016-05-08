@@ -10,23 +10,23 @@
 #define planet_sprite_h
 
 #include <stdio.h>
+#include <SDL2/SDL.h>
 #include "texture.h"
 #include "../coord.h"
 #include "../cbody.h"
 
 typedef struct {
-    cbody *rootbody;
+    CBody *rootbody;
     Texture *texture;
     int width;
     int height;
-    coordinate screenpos;
-    vector2d screenvel;
+    Coordinate screenpos;
+    Vector2d screenvel;
 } PSprite;
 
-PSprite *new_psprite();
+PSprite new_psprite();
 void psprite_move(PSprite *planet);
-void psprite_render(PSprite *planet);
-void free_psprite(PSprite *planet);
+void psprite_render(PSprite *planet, SDL_Renderer *renderer);
 
 
 #endif /* planet_sprite_h */

@@ -11,11 +11,11 @@
 
 #include "vector2d.h"
 
-typedef vector2d coordinate;
+typedef Vector2d Coordinate;
 
-void setpos (coordinate *c, int x, int y);
-void changepos (coordinate *c, int x, int y);
-double absdist (coordinate a, coordinate b);
+void setpos (Coordinate *c, int x, int y);
+void changepos (Coordinate *c, int x, int y);
+double absdist (Coordinate a, Coordinate b);
 
 
 #endif /* coord_h */

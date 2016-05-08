@@ -3,26 +3,26 @@
 #include "planet.h"
 #include "vector2d.h"
 
-double vectabs (vector2d a, vector2d b) {
+double vectabs (Vector2d a, Vector2d b) {
     return sqrt(pow(a.x-b.x, 2) + pow(a.y-b.y, 2));
 }
 
-vector2d vectadd (vector2d a, vector2d b)
+Vector2d vectadd (Vector2d a, Vector2d b)
 {
-    return (vector2d){a.x+b.x, a.y+b.y};
+    return (Vector2d){a.x+b.x, a.y+b.y};
 }
 
-vector2d vfmult (vector2d a, double k) {
-    return (vector2d){a.x*k, a.y*k};
+Vector2d vfmult (Vector2d a, double k) {
+    return (Vector2d){a.x*k, a.y*k};
 }
 
-vector2d atov2d (char *vect) {
+Vector2d atov2d (char *vect) {
     char *start = strchr(vect, '{');
     char *delim = strchr(vect, ',');
-    return (vector2d){atof(start+1),atof(delim+1)};
+    return (Vector2d){atof(start+1),atof(delim+1)};
 }
 
-bool vect_eq (vector2d a, vector2d b)
+bool vect_eq (Vector2d a, Vector2d b)
 {
     return (a.x==b.x)&&(a.y==b.y);
 }
