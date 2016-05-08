@@ -24,6 +24,7 @@ PSprite new_psprite(CBody *body, Texture *tex)
 
 void psprite_update(PSprite *planet) {
     planet->screenpos = screencoord(planet->rootbody->pos);
+    
 }
 
 void psprite_render(PSprite *planet, SDL_Renderer *renderer) {

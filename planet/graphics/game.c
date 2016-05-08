@@ -66,6 +66,7 @@ void closegame (ScreenComponents components)
 
 int rungame(Darray_CBody *system)
 {
+    CBody *sun = system->data;
     int status = 0;
     ScreenComponents components = startgame();
     if (components.status == false) {
@@ -109,13 +110,13 @@ int rungame(Darray_CBody *system)
         }
         
         dprintf("Left event poll\n");
-        cbody_update(system, 1*60*60*24);
+        cbody_update(system, 1*24*60*60);
         
         for (int i=0; i<disp_system->len; i++) {
             dprintf("Moving sprite %d\n", i);
             psprite_update(sprite+i);
             dprintf("The actual coordinates of body %d are (%f, %f)\n", i, body[i].pos.x, body[i].pos.y);
-            dprintf("Its screen coordinates are (%f, %f", sprite[i].screenpos.x, sprite[i].screenpos.y);
+            dprintf("Its screen coordinates are (%f, %f)\n", sprite[i].screenpos.x, sprite[i].screenpos.y);
         }
         
         SDL_SetRenderDrawColor(components.renderer, 0x00, 0x00, 0x00, 0x00);
@@ -127,7 +128,7 @@ int rungame(Darray_CBody *system)
         }
         
         SDL_RenderPresent(components.renderer);
-        SDL_Delay(5);
+        //SDL_Delay(5);
     }
     free_darray_PSprite(disp_system);
     

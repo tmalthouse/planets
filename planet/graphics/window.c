@@ -13,8 +13,8 @@
 SDL_Renderer *g_renderer = NULL;
 
 //I'm comfortable declaring the screen dims (but not the system maxcoords) as global, since there's always only one screen per program instance, but potentially multiple systems simultaneously at some point.
-int SCREEN_WIDTH = 1200;
-int SCREEN_HEIGHT = 800;
+int SCREEN_WIDTH = 1000;
+int SCREEN_HEIGHT = 720;
 
 
 /*!
@@ -34,7 +34,7 @@ static Vector2d sc_core (Vector2d spacecoord, Vector2d maxcoord) {
         return NULL_VECT;//This bit only gets called when wrappen in a void function anyways.
     }
     
-    ratio = SCREEN_HEIGHT/5e12;
+    //ratio = SCREEN_HEIGHT/1e12;
     Vector2d screencoord = {((float)SCREEN_WIDTH/2)+spacecoord.x*ratio,
         ((float)SCREEN_HEIGHT/2)+spacecoord.y*ratio};
     

@@ -9,6 +9,7 @@
 #ifndef debug_h
 #define debug_h
 
+#undef DEBUG
 
 #ifdef DEBUG
 #define dprintf(...) printf(__VA_ARGS__);

@@ -7,7 +7,7 @@
 Vector2d gforce (CBody a, CBody b)
 {
    double fnet = (BIG_G * a.mass * b.mass)/pow(absdist(a.pos, b.pos),2);
-   double theta = atan ((b.pos.y-a.pos.y)/(b.pos.x-a.pos.x));
+   double theta = atan2 ((b.pos.y-a.pos.y),(b.pos.x-a.pos.x));
    Vector2d x = {fnet*cos(theta), fnet*sin(theta)};
    return x;
 }
@@ -30,9 +30,12 @@ void calc_forces (Darray_CBody *bodies)
         planets[i].fnet = (Vector2d){0, 0};//Set force to 0
         for (int j=0; j<bodies->len; j++) {
             if (i!=j) {//We really don't want to calc force to ourself--div/0 error
-                addforce (&planets[i], gforce(planets[i], planets[j]));
+                dprintf("Force on body %s from body %s is %f\n", planets[i].name, planets[j].name, vectabs(gforce(planets[i], planets[j]), (Vector2d){0,0}))
+                addforce (planets+i, gforce(planets[i], planets[j]));
             }
         }
+        dprintf("Net force on body %s is %f\n", planets[i].name, vectabs(planets[i].fnet, (Vector2d){0,0}));
+
     }
 }
 
