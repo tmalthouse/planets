@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "../coord.h"
+#include "../debug.h"
 
 extern int SCREEN_WIDTH;
 extern int SCREEN_HEIGHT;

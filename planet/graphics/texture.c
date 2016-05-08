@@ -27,6 +27,7 @@ Texture *load_texture(char *path, SDL_Renderer *renderer)
         return NULL;
     }
     
+    tex->texture = new_text;
     tex->width = loaded_surface->w;
     tex->height = loaded_surface->h;
     SDL_FreeSurface(loaded_surface);
@@ -58,8 +59,13 @@ void texture_set_alpha(Texture *t, uint8_t a)
 
 void render_texture(Texture *t, Coordinate pos, SDL_Renderer *renderer, SDL_Rect *clip, double angle, SDL_Point *center, SDL_RendererFlip flip)
 {
+    dprintf("Texture t h: %d, w: %d\n", t->height, t->width);
+    dprintf("address of t is %p\n", t);
     SDL_Rect render_quad = {pos.x, pos.y, t->width, t->height};
-    
+    render_quad.x = pos.x;
+    render_quad.y = pos.y;
+    render_quad.w = t->width;
+    render_quad.h = t->height;
     if (clip != NULL) {
         render_quad.w = clip->w;
         render_quad.h = clip->h;

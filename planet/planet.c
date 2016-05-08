@@ -70,5 +70,6 @@ Coordinate absmaxpos (Darray_CBody *bodies) {
             max.y = y;
         }
     }
+    dprintf("Max coord is (%f,%f)\n", max.x, max.y);
     return max;
 }

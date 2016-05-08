@@ -25,7 +25,7 @@ typedef struct {
 } PSprite;
 
 PSprite new_psprite();
-void psprite_move(PSprite *planet);
+void psprite_update(PSprite *planet);
 void psprite_render(PSprite *planet, SDL_Renderer *renderer);
 
 

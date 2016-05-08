@@ -101,12 +101,12 @@
 				E99985441CDE8C4C00967314 /* cbody.h */,
 				E996A5541CDA8B9E00201CB7 /* coord.c */,
 				E996A54E1CD9905100201CB7 /* coord.h */,
-				E99985641CDEEAC900967314 /* debug.h */,
-				E996A5381CD9741A00201CB7 /* main.c */,
 				E99985411CDE7A3700967314 /* darray_types.c */,
 				E99985421CDE7A3700967314 /* darray_types.h */,
+				E99985641CDEEAC900967314 /* debug.h */,
 				E996A54B1CD9871B00201CB7 /* file.c */,
 				E996A54C1CD9871B00201CB7 /* file.h */,
+				E996A5381CD9741A00201CB7 /* main.c */,
 				E996A5431CD9743200201CB7 /* planet.c */,
 				E996A5441CD9743200201CB7 /* planet.h */,
 				E996A5451CD9743200201CB7 /* vector2d.c */,
@@ -127,14 +127,14 @@
 		E999854D1CDEBB1500967314 /* graphics */ = {
 			isa = PBXGroup;
 			children = (
-				E999854E1CDEBB2300967314 /* window.c */,
-				E999854F1CDEBB2300967314 /* window.h */,
-				E99985511CDEBBC600967314 /* texture.c */,
-				E99985521CDEBBC600967314 /* texture.h */,
-				E999855B1CDEC86A00967314 /* planet_sprite.c */,
 				E99985611CDED75000967314 /* game.c */,
 				E99985621CDED75000967314 /* game.h */,
+				E999855B1CDEC86A00967314 /* planet_sprite.c */,
 				E999855C1CDEC86A00967314 /* planet_sprite.h */,
+				E99985511CDEBBC600967314 /* texture.c */,
+				E99985521CDEBBC600967314 /* texture.h */,
+				E999854E1CDEBB2300967314 /* window.c */,
+				E999854F1CDEBB2300967314 /* window.h */,
 			);
 			name = graphics;
 			sourceTree = "<group>";

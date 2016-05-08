@@ -24,6 +24,7 @@ ScreenComponents startgame()
         fprintf(stderr, "Couldn't start SDL. Error: %s\n", SDL_GetError());
         return (ScreenComponents){false, NULL, NULL};
     }
+    dprintf("Initialized video.\n");
     
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
     
@@ -71,6 +72,7 @@ int rungame(Darray_CBody *system)
         status--;
         goto err;
     }
+    dprintf("Components are good.\n");
     
     Texture *planettex = load_texture("/Users/Thomas/Desktop/planet.bmp", components.renderer);
     if (planettex == NULL) {
@@ -84,33 +86,48 @@ int rungame(Darray_CBody *system)
     PSprite *sprite = disp_system->data;
     CBody *body = system->data;
     
+    dprintf("Darray_PSprite *created. Initial len is %d, cap is %d\n.", disp_system->len, disp_system->cap);
     screencoord_set(absmaxpos(system));
     
+    dprintf("Filling disp_system.\n");
     for (int i=0; i<system->len; i++) {
-        sprite[i] = new_psprite(body[i], planettex);
+        darray_append_PSprite(disp_system, new_psprite(body+i, planettex));
+        dprintf("Filled index %d. Name is %s\n", i, sprite[i].rootbody->name);
     }
     
+    dprintf("Len of disp_system is %d\n", disp_system->len);
+    #ifdef DEBUG
+    int counter = 0;
+    #endif
+    
     while (!quit) {
+        dprintf("Starting loop %d.\n", counter++);
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 quit = true;
             }
         }
         
-        cbody_update(system, 1);
+        dprintf("Left event poll\n");
+        cbody_update(system, 1*60*60*24);
         
         for (int i=0; i<disp_system->len; i++) {
-            psprite_move(sprite+i);
+            dprintf("Moving sprite %d\n", i);
+            psprite_update(sprite+i);
+            dprintf("The actual coordinates of body %d are (%f, %f)\n", i, body[i].pos.x, body[i].pos.y);
+            dprintf("Its screen coordinates are (%f, %f", sprite[i].screenpos.x, sprite[i].screenpos.y);
         }
         
-        SDL_SetRenderDrawColor(components.renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        SDL_SetRenderDrawColor(components.renderer, 0x00, 0x00, 0x00, 0x00);
         SDL_RenderClear(components.renderer);
         
         for (int i=0; i<disp_system->len; i++) {
+            dprintf("Rendering sprite %d\n",i);
             psprite_render(sprite+i, components.renderer);
         }
         
         SDL_RenderPresent(components.renderer);
+        SDL_Delay(5);
     }
     free_darray_PSprite(disp_system);
     

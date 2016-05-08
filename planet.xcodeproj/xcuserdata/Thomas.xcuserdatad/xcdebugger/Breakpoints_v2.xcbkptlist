@@ -9,12 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../../../../../usr/local/include/gc/gc.h"
-            timestampString = "484083900.766691"
+            filePath = "planet/graphics/game.c"
+            timestampString = "484378371.48685"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411">
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "rungame()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -22,7 +22,7 @@ PSprite new_psprite(CBody *body, Texture *tex)
     return planet;
 }
 
-void psprite_move(PSprite *planet) {
+void psprite_update(PSprite *planet) {
     planet->screenpos = screencoord(planet->rootbody->pos);
 }
 
