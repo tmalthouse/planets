@@ -23,7 +23,7 @@ int SCREEN_HEIGHT = 720;
  */
 
 //Declared static so we don't pollute the namespace. This function should never be called directly, only through the wrappers below.
-static coordinate sc_core (coordinate spacecoord, coordinate maxcoord) {
+static vector2d sc_core (vector2d spacecoord, vector2d maxcoord) {
     static double ratio = NAN;//We want the ratio to persist over multiple calls--a bit like a closure but we only need one.
     
     if (!vect_eq(maxcoord, NULL_VECT)) {//The only time this bit should be called is if we're calling screencoord_set
@@ -34,18 +34,18 @@ static coordinate sc_core (coordinate spacecoord, coordinate maxcoord) {
         return NULL_VECT;//This bit only gets called when wrappen in a void function anyways.
     }
     
-    coordinate screencoord = {((float)SCREEN_WIDTH/2)+spacecoord.x*ratio,
+    vector2d screencoord = {((float)SCREEN_WIDTH/2)+spacecoord.x*ratio,
         ((float)SCREEN_HEIGHT/2)+spacecoord.y*ratio};
     
     return screencoord;
 }
 
-coordinate screencoord (coordinate spacecoord)
+vector2d screencoord (vector2d spacecoord)
 {
     return sc_core(spacecoord, NULL_VECT);
 }
 
-void screencoord_set (coordinate absmax)
+void screencoord_set (vector2d absmax)
 {
     sc_core(NULL_VECT, absmax);
 }

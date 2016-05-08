@@ -17,6 +17,7 @@
 		E99985531CDEBBC600967314 /* texture.c in Sources */ = {isa = PBXBuildFile; fileRef = E99985511CDEBBC600967314 /* texture.c */; };
 		E99985581CDEC67E00967314 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E99985571CDEC67E00967314 /* libSDL2-2.0.0.dylib */; };
 		E999855A1CDEC69700967314 /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E99985591CDEC69700967314 /* libSDL2_image-2.0.0.dylib */; };
+		E999855D1CDEC86A00967314 /* planet_sprite.c in Sources */ = {isa = PBXBuildFile; fileRef = E999855B1CDEC86A00967314 /* planet_sprite.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +54,8 @@
 		E99985521CDEBBC600967314 /* texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = texture.h; path = graphics/texture.h; sourceTree = "<group>"; };
 		E99985571CDEC67E00967314 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../../usr/local/Cellar/sdl2/2.0.4/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		E99985591CDEC69700967314 /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "../../../../../usr/local/Cellar/sdl2_image/2.0.1/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
+		E999855B1CDEC86A00967314 /* planet_sprite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = planet_sprite.c; path = graphics/planet_sprite.c; sourceTree = "<group>"; };
+		E999855C1CDEC86A00967314 /* planet_sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = planet_sprite.h; path = graphics/planet_sprite.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +126,8 @@
 				E999854F1CDEBB2300967314 /* window.h */,
 				E99985511CDEBBC600967314 /* texture.c */,
 				E99985521CDEBBC600967314 /* texture.h */,
+				E999855B1CDEC86A00967314 /* planet_sprite.c */,
+				E999855C1CDEC86A00967314 /* planet_sprite.h */,
 			);
 			name = graphics;
 			sourceTree = "<group>";
@@ -185,6 +190,7 @@
 			files = (
 				E996A54A1CD9743200201CB7 /* vector2d.c in Sources */,
 				E996A5391CD9741A00201CB7 /* main.c in Sources */,
+				E999855D1CDEC86A00967314 /* planet_sprite.c in Sources */,
 				E996A5551CDA8B9E00201CB7 /* coord.c in Sources */,
 				E99985531CDEBBC600967314 /* texture.c in Sources */,
 				E99985501CDEBB2300967314 /* window.c in Sources */,

@@ -17,8 +17,8 @@ extern int SCREEN_WIDTH;
 extern int SCREEN_HEIGHT;
 extern SDL_Renderer *g_renderer;
 
-coordinate screencoord (coordinate spacecoord);
-void screencoord_set (coordinate maxcoord);
+vector2d screencoord (vector2d spacecoord);
+void screencoord_set (vector2d maxcoord);
 
 
 #endif /* window_h */

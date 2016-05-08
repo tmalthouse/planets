@@ -12,7 +12,9 @@
 #include <stdio.h>
 #include <darray.h>
 #include "cbody.h"
+#include "graphics/planet_sprite.h"
 
 darray_type_header(cbody);
+darray_type_header(PSprite);
 
 #endif /* darray_types_h */

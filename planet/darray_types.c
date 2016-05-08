@@ -10,3 +10,4 @@
 #include "darray_types.h"
 
 darray_type(cbody);
+darray_type(PSprite)
