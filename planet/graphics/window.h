@@ -16,6 +16,7 @@
 
 extern int SCREEN_WIDTH;
 extern int SCREEN_HEIGHT;
+extern int MAX_FPS;
 extern SDL_Renderer *g_renderer;
 
 typedef struct {

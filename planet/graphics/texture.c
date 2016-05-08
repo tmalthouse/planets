@@ -42,9 +42,9 @@ void free_texture(Texture *t)
     }
 }
 
-void texture_set_color(Texture *t, uint8_t r, uint8_t g, uint8_t b)
+void texture_set_color(Texture *t, Color c)
 {
-    SDL_SetTextureColorMod(t->texture, r, g, b);
+    SDL_SetTextureColorMod(t->texture, c.r, c.g, c.b);
 }
 
 void texture_set_blend_mode(Texture *t, SDL_BlendMode blend)

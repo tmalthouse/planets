@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E99268FF1CDF80CF00143E9B /* color.c in Sources */ = {isa = PBXBuildFile; fileRef = E99268FD1CDF80CF00143E9B /* color.c */; };
+		E99269021CDFAAB300143E9B /* timer.c in Sources */ = {isa = PBXBuildFile; fileRef = E99269001CDFAAB300143E9B /* timer.c */; };
 		E996A5391CD9741A00201CB7 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5381CD9741A00201CB7 /* main.c */; };
 		E996A5491CD9743200201CB7 /* planet.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5431CD9743200201CB7 /* planet.c */; };
 		E996A54A1CD9743200201CB7 /* vector2d.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5451CD9743200201CB7 /* vector2d.c */; };
@@ -34,7 +36,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E996A5351CD9741A00201CB7 /* planet */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.executable"; path = planet; sourceTree = BUILT_PRODUCTS_DIR; };
+		E99268FD1CDF80CF00143E9B /* color.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = color.c; sourceTree = "<group>"; };
+		E99268FE1CDF80CF00143E9B /* color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = color.h; sourceTree = "<group>"; };
+		E99269001CDFAAB300143E9B /* timer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = timer.c; path = graphics/timer.c; sourceTree = "<group>"; };
+		E99269011CDFAAB300143E9B /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = timer.h; path = graphics/timer.h; sourceTree = "<group>"; };
+		E996A5351CD9741A00201CB7 /* planet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = planet; sourceTree = BUILT_PRODUCTS_DIR; };
 		E996A5381CD9741A00201CB7 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		E996A5431CD9743200201CB7 /* planet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = planet.c; sourceTree = "<group>"; };
 		E996A5441CD9743200201CB7 /* planet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = planet.h; sourceTree = "<group>"; };
@@ -99,6 +105,8 @@
 				E996A5501CD991B600201CB7 /* test */,
 				E999854D1CDEBB1500967314 /* graphics */,
 				E99985441CDE8C4C00967314 /* cbody.h */,
+				E99268FD1CDF80CF00143E9B /* color.c */,
+				E99268FE1CDF80CF00143E9B /* color.h */,
 				E996A5541CDA8B9E00201CB7 /* coord.c */,
 				E996A54E1CD9905100201CB7 /* coord.h */,
 				E99985411CDE7A3700967314 /* darray_types.c */,
@@ -133,6 +141,8 @@
 				E999855C1CDEC86A00967314 /* planet_sprite.h */,
 				E99985511CDEBBC600967314 /* texture.c */,
 				E99985521CDEBBC600967314 /* texture.h */,
+				E99269001CDFAAB300143E9B /* timer.c */,
+				E99269011CDFAAB300143E9B /* timer.h */,
 				E999854E1CDEBB2300967314 /* window.c */,
 				E999854F1CDEBB2300967314 /* window.h */,
 			);
@@ -200,9 +210,11 @@
 				E999855D1CDEC86A00967314 /* planet_sprite.c in Sources */,
 				E996A5551CDA8B9E00201CB7 /* coord.c in Sources */,
 				E99985531CDEBBC600967314 /* texture.c in Sources */,
+				E99268FF1CDF80CF00143E9B /* color.c in Sources */,
 				E99985631CDED75000967314 /* game.c in Sources */,
 				E99985501CDEBB2300967314 /* window.c in Sources */,
 				E996A5491CD9743200201CB7 /* planet.c in Sources */,
+				E99269021CDFAAB300143E9B /* timer.c in Sources */,
 				E996A54D1CD9871B00201CB7 /* file.c in Sources */,
 				E99985431CDE7A3700967314 /* darray_types.c in Sources */,
 			);

@@ -11,6 +11,7 @@
 
 #include "vector2d.h"
 #include "coord.h"
+#include "color.h"
 
 typedef struct {
     char name[20];
@@ -19,6 +20,7 @@ typedef struct {
     Vector2d vel;
     Vector2d fnet;
     Coordinate pos;
+    Color color;
 } CBody;
 
 #endif /* cbody_h */

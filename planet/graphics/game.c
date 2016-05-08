@@ -13,6 +13,7 @@
 #include "window.h"
 #include "texture.h"
 #include "planet_sprite.h"
+#include "timer.h"
 #include "../debug.h"
 #include "../darray_types.h"
 #include "../cbody.h"
@@ -91,7 +92,9 @@ int rungame(Darray_CBody *system)
     
     dprintf("Filling disp_system.\n");
     for (int i=0; i<system->len; i++) {
-        darray_append_PSprite(disp_system, new_psprite(body+i, planettex));
+        Texture *tex = load_texture("/Users/Thomas/Desktop/planet.bmp", components.renderer);
+        texture_set_color(tex, body[i].color);
+        darray_append_PSprite(disp_system, new_psprite(body+i, tex));
         dprintf("Filled index %d. Name is %s\n", i, sprite[i].rootbody->name);
     }
     
@@ -100,7 +103,11 @@ int rungame(Darray_CBody *system)
     int counter = 0;
     #endif
     
+    Timer framecontrol = new_timer();
+    
     while (!quit) {
+        start_timer(&framecontrol);
+        
         dprintf("Starting loop %d.\n", counter++);
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
@@ -110,6 +117,7 @@ int rungame(Darray_CBody *system)
         
         dprintf("Left event poll\n");
         cbody_update(system, 1*24*60*60);
+        
         
         for (int i=0; i<disp_system->len; i++) {
             dprintf("Moving sprite %d\n", i);
@@ -127,7 +135,13 @@ int rungame(Darray_CBody *system)
         }
         
         SDL_RenderPresent(components.renderer);
-        //SDL_Delay(5);
+        
+        if (get_time(&framecontrol) < 1000/MAX_FPS) {
+            SDL_Delay((1000/MAX_FPS) - (uint32_t)get_time(&framecontrol));
+        }
+    }
+    for (int i=0; i<disp_system->len; i++) {
+        free(disp_system->data[i].texture);
     }
     free_darray_PSprite(disp_system);
     
