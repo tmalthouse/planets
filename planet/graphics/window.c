@@ -29,7 +29,7 @@ static Vector2d sc_core (Vector2d spacecoord, Vector2d maxcoord) {
         long double xratio = SCREEN_WIDTH/(2*maxcoord.x);//0,0 is in the middle of the screen in space coordinates, but in the top left in screen coords.
         long double yratio = SCREEN_HEIGHT/(2*maxcoord.y);
         
-        ratio = (xratio<yratio)?xratio:yratio;//Set the ratio to the smaller of the two.
+        ratio = ((xratio<yratio)?xratio:yratio)*0.66;//Set the ratio to the smaller of the two, plus a bit of fudge factor.
         dprintf("ratio set to %f\n", ratio);
         return NULL_VECT;//This bit only gets called when wrappen in a void function anyways.
     }

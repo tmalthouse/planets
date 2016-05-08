@@ -66,7 +66,6 @@ void closegame (ScreenComponents components)
 
 int rungame(Darray_CBody *system)
 {
-    CBody *sun = system->data;
     int status = 0;
     ScreenComponents components = startgame();
     if (components.status == false) {
