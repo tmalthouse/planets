@@ -10,6 +10,7 @@
 		E99268FF1CDF80CF00143E9B /* color.c in Sources */ = {isa = PBXBuildFile; fileRef = E99268FD1CDF80CF00143E9B /* color.c */; };
 		E99269021CDFAAB300143E9B /* timer.c in Sources */ = {isa = PBXBuildFile; fileRef = E99269001CDFAAB300143E9B /* timer.c */; };
 		E99269071CDFF53600143E9B /* libSDL2_ttf-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E99269061CDFF53600143E9B /* libSDL2_ttf-2.0.0.dylib */; };
+		E992690B1CE00C2700143E9B /* message.c in Sources */ = {isa = PBXBuildFile; fileRef = E99269091CE00C2700143E9B /* message.c */; };
 		E996A5391CD9741A00201CB7 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5381CD9741A00201CB7 /* main.c */; };
 		E996A5491CD9743200201CB7 /* planet.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5431CD9743200201CB7 /* planet.c */; };
 		E996A54A1CD9743200201CB7 /* vector2d.c in Sources */ = {isa = PBXBuildFile; fileRef = E996A5451CD9743200201CB7 /* vector2d.c */; };
@@ -42,6 +43,9 @@
 		E99269001CDFAAB300143E9B /* timer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = timer.c; path = graphics/timer.c; sourceTree = "<group>"; };
 		E99269011CDFAAB300143E9B /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = timer.h; path = graphics/timer.h; sourceTree = "<group>"; };
 		E99269061CDFF53600143E9B /* libSDL2_ttf-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_ttf-2.0.0.dylib"; path = "../../../../../usr/local/Cellar/sdl2_ttf/2.0.13/lib/libSDL2_ttf-2.0.0.dylib"; sourceTree = "<group>"; };
+		E99269081CE0003800143E9B /* psprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = psprite.h; path = graphics/psprite.h; sourceTree = "<group>"; };
+		E99269091CE00C2700143E9B /* message.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = message.c; path = graphics/message.c; sourceTree = "<group>"; };
+		E992690A1CE00C2700143E9B /* message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = message.h; path = graphics/message.h; sourceTree = "<group>"; };
 		E996A5351CD9741A00201CB7 /* planet */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = planet; sourceTree = BUILT_PRODUCTS_DIR; };
 		E996A5381CD9741A00201CB7 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		E996A5431CD9743200201CB7 /* planet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = planet.c; sourceTree = "<group>"; };
@@ -140,9 +144,12 @@
 			isa = PBXGroup;
 			children = (
 				E99985611CDED75000967314 /* game.c */,
+				E99269091CE00C2700143E9B /* message.c */,
+				E992690A1CE00C2700143E9B /* message.h */,
 				E99985621CDED75000967314 /* game.h */,
 				E999855B1CDEC86A00967314 /* planet_sprite.c */,
 				E999855C1CDEC86A00967314 /* planet_sprite.h */,
+				E99269081CE0003800143E9B /* psprite.h */,
 				E99985511CDEBBC600967314 /* texture.c */,
 				E99985521CDEBBC600967314 /* texture.h */,
 				E99269001CDFAAB300143E9B /* timer.c */,
@@ -221,6 +228,7 @@
 				E99269021CDFAAB300143E9B /* timer.c in Sources */,
 				E996A54D1CD9871B00201CB7 /* file.c in Sources */,
 				E99985431CDE7A3700967314 /* darray_types.c in Sources */,
+				E992690B1CE00C2700143E9B /* message.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
