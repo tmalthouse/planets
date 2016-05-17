@@ -212,11 +212,15 @@ int rungame(Darray_CBody *system)
     }
     for (int i=0; i<disp_system->len; i++) {
         free(disp_system->data[i].texture);
+        disp_system->data[i].texture = NULL;
+        
         free(disp_system->data[i].label);
+        disp_system->data[i].label = NULL;
     }
     free_darray_PSprite(disp_system);
+    disp_system = NULL;
     
-    //free(m.tex.texture);
+
     
     err://We jump here if there's an error, but passing here DOES NOT mean an error occured.
     
