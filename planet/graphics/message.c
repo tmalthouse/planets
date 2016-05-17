@@ -39,7 +39,7 @@ void render_message(Message *m, uint64_t tick)
             return;
         }
         
-        free(m->tex.texture);//Free the last message
+        SDL_DestroyTexture(m->tex.texture);
         m->tex.texture = SDL_CreateTextureFromSurface(m->renderer, text_surf);
         m->tex.height = text_surf->h;
         m->tex.width = text_surf->w;

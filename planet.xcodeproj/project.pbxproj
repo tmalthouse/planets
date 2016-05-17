@@ -72,6 +72,7 @@
 		E99985611CDED75000967314 /* game.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = game.c; path = graphics/game.c; sourceTree = "<group>"; };
 		E99985621CDED75000967314 /* game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = game.h; path = graphics/game.h; sourceTree = "<group>"; };
 		E99985641CDEEAC900967314 /* debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
+		E9A139FF1CEBD74800E207E5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +92,7 @@
 		E996A52C1CD9741A00201CB7 = {
 			isa = PBXGroup;
 			children = (
+				E9A139FF1CEBD74800E207E5 /* README.md */,
 				E99269061CDFF53600143E9B /* libSDL2_ttf-2.0.0.dylib */,
 				E99985591CDEC69700967314 /* libSDL2_image-2.0.0.dylib */,
 				E99985571CDEC67E00967314 /* libSDL2-2.0.0.dylib */,
@@ -144,9 +146,9 @@
 			isa = PBXGroup;
 			children = (
 				E99985611CDED75000967314 /* game.c */,
+				E99985621CDED75000967314 /* game.h */,
 				E99269091CE00C2700143E9B /* message.c */,
 				E992690A1CE00C2700143E9B /* message.h */,
-				E99985621CDED75000967314 /* game.h */,
 				E999855B1CDEC86A00967314 /* planet_sprite.c */,
 				E999855C1CDEC86A00967314 /* planet_sprite.h */,
 				E99269081CE0003800143E9B /* psprite.h */,
