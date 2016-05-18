@@ -100,7 +100,8 @@ int rungame(Darray_CBody *system)
     
     dprintf("Darray_PSprite *created. Initial len is %d, cap is %d\n.", disp_system->len, disp_system->cap);
     //Set the screen conversion factor
-    screencoord_set(absmaxpos(system));
+    Coordinate max = absmaxpos(system);
+    screencoord_set(vfmult(max, -1), max);
     
     //Start up the font for planet labels and message display
     TTF_Init();

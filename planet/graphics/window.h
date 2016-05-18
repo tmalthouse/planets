@@ -26,7 +26,7 @@ typedef struct {
 } ScreenComponents;
 
 Vector2d screencoord (Vector2d spacecoord);
-void screencoord_set (Vector2d maxcoord);
+void screencoord_set (Coordinate top_left, Coordinate bottom_left);
 
 
 #endif /* window_h */
