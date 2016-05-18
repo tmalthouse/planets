@@ -62,7 +62,9 @@ int main(int argc, const char * argv[]) {
     
     rungame(bodies);
     
-    FILE *sys = fopen("/users/Thomas/Desktop/system.sys", "w");
+    const char *saveloc = strcmp(argv[1], "demo") ? "system.sys" : argv[1];//If we started from a file, overwrite that file. Otherwise, save it as default.
+    
+    FILE *sys = fopen(saveloc, "w");
     savesystem(bodies, sys);
     fclose(sys);
     

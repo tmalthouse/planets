@@ -9,6 +9,8 @@
 #include "color.h"
 #include "debug.h"
 
+
+//For both these functions, we treat the hex value (a 32-bit uint) like an array of 4 8-bit values--a, b, g, r in that order.
 Color hex_color(uint32_t hex)
 {
     //We're assuming intel procs here--little endian.
