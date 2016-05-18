@@ -222,7 +222,7 @@ int rungame(Darray_CBody *system)
     
 
     
-    err://We jump here if there's an error, but passing here DOES NOT mean an error occured.
+err://We jump here if there's an error, but passing here DOES NOT mean an error occured.
     
     closegame(components);
     return status;
