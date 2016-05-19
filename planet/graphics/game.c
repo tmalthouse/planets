@@ -151,6 +151,7 @@ int rungame(Darray_CBody *system)
                 
                 case SDL_KEYDOWN:
                     {
+                        //First, we handle keys that display a message (tw related stuff)
                         char tmp[50];
                         switch (event.key.keysym.sym) {
                             case SDLK_PERIOD://Increase time speed
@@ -174,7 +175,29 @@ int rungame(Darray_CBody *system)
                         update_message(&m, tmp, SDL_GetTicks());
                         dprintf("Updates per frame: %d\n", updates_per_frame);
                     }
-                    break;
+                    
+                    {
+                        switch (event.key.keysym.sym) {
+                            case SDLK_RIGHT:
+                                screencoord_shift(10, 0);
+                                break;
+                            
+                            case SDLK_LEFT:
+                                screencoord_shift(-10, 0);
+                                break;
+                            
+                            case SDLK_UP:
+                                screencoord_shift(0, 10);
+                                break;
+                            
+                            case SDLK_DOWN:
+                                screencoord_shift(0, -10);
+                                
+                            default:
+                                break;
+                        }
+                    }
+                    break;//We're still in a switch statement here.
             }
         }
         

@@ -21,7 +21,8 @@ int MAX_FPS = 60;
 enum SC_Mode {
     RETURN_COORD,
     SCALE,
-    SET_COORD
+    SET_COORD,
+    SC_SHIFT
 };
 
 static double calculate_ratio (Coordinate bottom_right, Coordinate top_left)
@@ -38,7 +39,7 @@ static double calculate_ratio (Coordinate bottom_right, Coordinate top_left)
  */
 
 //Declared static so we don't pollute the namespace. This function should never be called directly, only through the wrappers below.
-static Vector2d sc_core (enum SC_Mode mode, Vector2d spacecoord, double factor, Coordinate tl, Coordinate br) {
+static Vector2d sc_core (enum SC_Mode mode, Vector2d spacecoord, double factor, Coordinate tl, Coordinate br, int dx, int dy) {
     static Coordinate top_left, bottom_right;
     static double ratio;
     
@@ -59,30 +60,49 @@ static Vector2d sc_core (enum SC_Mode mode, Vector2d spacecoord, double factor, 
             ratio = calculate_ratio(bottom_right, top_left);
             return NULL_VECT;
         
+        case SC_SHIFT:
+            {
+                double x = (double)dx/ratio;
+                double y = (double)dy/ratio;
+                top_left.x += x;
+                bottom_right.x += x;
+                top_left.y += y;
+                bottom_right.y += y;
+            }
+            break;
+        
         case RETURN_COORD:
             break;//We just want to fall through
         default:
             break;
             
     }
-    Vector2d screencoord = {((float)SCREEN_WIDTH/2)+spacecoord.x*ratio,
-        ((float)SCREEN_HEIGHT/2)+spacecoord.y*ratio};
+    
+
+    
+    Vector2d screencoord = {(spacecoord.x-top_left.x)*ratio, (spacecoord.y-top_left.y)*ratio};
     vdprintf("screen x: %f, screen y: %f\n", screencoord.x, screencoord.y);
+    
     return screencoord;
 }
 
 Vector2d screencoord (Vector2d spacecoord)
 {
-    return sc_core(RETURN_COORD, spacecoord, NAN, NULL_VECT, NULL_VECT);
+    return sc_core(RETURN_COORD, spacecoord, NAN, NULL_VECT, NULL_VECT, 0, 0);
 }
 
 void screencoord_zoom (double factor)
 {
     dprintf("Scaling the screen by factor of %f\n", factor);
-    sc_core(SCALE, NULL_VECT, factor, NULL_VECT, NULL_VECT);
+    sc_core(SCALE, NULL_VECT, factor, NULL_VECT, NULL_VECT, 0, 0);
 }
 
-void screencoord_set ( Coordinate top_left, Coordinate bottom_right)
+void screencoord_set (Coordinate top_left, Coordinate bottom_right)
 {
-    sc_core(SET_COORD, NULL_VECT, NAN, top_left, bottom_right);
+    sc_core(SET_COORD, NULL_VECT, NAN, top_left, bottom_right, 0, 0);
+}
+
+void screencoord_shift (int x, int y)
+{
+    sc_core(SC_SHIFT, NULL_VECT, NAN, NULL_VECT, NULL_VECT, x, y);
 }
