@@ -53,9 +53,10 @@ static Vector2d sc_core (enum SC_Mode mode, Vector2d spacecoord, double factor, 
         
         /*Handle changing scaling factor*/
         case SCALE:
-            vfmult(top_left, factor);
-            vfmult(bottom_right, factor);
-            ratio = calculate_ratio(br, tl);
+            dprintf("Scaling factor is %f\n", factor);
+            top_left = vfmult(top_left, factor);
+            bottom_right = vfmult(bottom_right, factor);
+            ratio = calculate_ratio(bottom_right, top_left);
             return NULL_VECT;
         
         case RETURN_COORD:

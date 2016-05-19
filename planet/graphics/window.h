@@ -26,6 +26,7 @@ typedef struct {
 } ScreenComponents;
 
 Vector2d screencoord (Vector2d spacecoord);
+void screencoord_zoom (double factor);
 void screencoord_set (Coordinate top_left, Coordinate bottom_left);
 
 

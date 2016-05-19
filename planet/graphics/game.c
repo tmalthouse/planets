@@ -20,7 +20,7 @@
 #include "../cbody.h"
 #include "../planet.h"
 
-ScreenComponents startgame()
+ScreenComponents video_init()
 {
     //Start the video subsystem
     if (SDL_Init(SDL_INIT_VIDEO)) {
@@ -76,7 +76,7 @@ int rungame(Darray_CBody *system)
     int status = 0;
     
     //Save the things from startup
-    ScreenComponents components = startgame();
+    ScreenComponents components = video_init();
     if (components.status == false) {
         status--;
         goto err;
@@ -137,32 +137,44 @@ int rungame(Darray_CBody *system)
         
         //Check for events
         while (SDL_PollEvent(&event)) {
-            //If the user wants to quit
-            if (event.type == SDL_QUIT) {
-                quit = true;
-            } else if (event.type == SDL_KEYDOWN) {
-                char tmp[50];
-                switch (event.key.keysym.sym) {
-                    case SDLK_PERIOD://Increase time speed
-                        updates_per_frame+=10;
-                        sprintf(tmp, "Timewarp: %dx", updates_per_frame/10);
-                        break;
-                    case SDLK_COMMA://Decrease time speed, up to 0
-                        if (updates_per_frame>=10) {
-                            updates_per_frame-=10;
-                            sprintf(tmp, "Timewarp: %dx", updates_per_frame/10);
+            switch (event.type) {
+                case SDL_QUIT:
+                    quit = true;
+                    break;
+                
+                case SDL_MOUSEWHEEL:
+                    {
+                        double direction = (event.wheel.y > 0) ? 1 : -1;
+                        screencoord_zoom(1+((direction*4)/MAX_FPS));
+                    }
+                    break;
+                
+                case SDL_KEYDOWN:
+                    {
+                        char tmp[50];
+                        switch (event.key.keysym.sym) {
+                            case SDLK_PERIOD://Increase time speed
+                                updates_per_frame+=10;
+                                sprintf(tmp, "Timewarp: %dx", updates_per_frame/10);
+                                break;
+                            case SDLK_COMMA://Decrease time speed, up to 0
+                                if (updates_per_frame>=10) {
+                                    updates_per_frame-=10;
+                                    sprintf(tmp, "Timewarp: %dx", updates_per_frame/10);
+                                }
+                                break;
+                            case SDLK_ESCAPE://Pause the game
+                                sprintf(tmp, "Game %s", paused?"unpaused":"paused");
+                                paused = !paused;
+                                break;
+                            default:
+                                sprintf(tmp, " ");//Clear it out so we don't show some garbage message
+                                break;
                         }
-                        break;
-                    case SDLK_ESCAPE://Pause the game
-                        sprintf(tmp, "Game %s", paused?"unpaused":"paused");
-                        paused = !paused;
-                        break;
-                    default:
-                        sprintf(tmp, " ");//Clear it out so we don't show some garbage message
-                        break;
-                }
-                update_message(&m, tmp, SDL_GetTicks());
-                dprintf("Updates per frame: %d\n", updates_per_frame);
+                        update_message(&m, tmp, SDL_GetTicks());
+                        dprintf("Updates per frame: %d\n", updates_per_frame);
+                    }
+                    break;
             }
         }
         
