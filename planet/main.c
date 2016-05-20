@@ -13,15 +13,15 @@
 #include "color.h"
 
 int main(int argc, const char * argv[]) {
-    
+
     if (argc != 2) {
         printf("This program needs to be called with one argument:\n");
         printf("\t-Either a .sys file (generated on exit\n");
-        printf("\t-Or with the word \"demo\"--This loads the inner solar system and a comet.");
+        printf("\t-Or with the word \"demo\"--This loads the inner solar system and a comet.\n");
         return -1;
-        
+
     }
-    
+
     Darray_CBody *bodies;
     int s = 0;
     if (!strcmp(argv[1], "demo")) {
@@ -36,7 +36,7 @@ int main(int argc, const char * argv[]) {
         CBody neptune = {"Neptune", 1.02e26, 1, {5430, 0}, {}, {0,-4.504e12}, hex_color(COLOR_BLUE)};
         CBody pluto = {"Pluto", 1.3e23, 1, {6100, 0}, {}, {0,-4.436e12}, hex_color(COLOR_GRAY)};
         CBody comet = {"Comet", 3.3e10, 1, {66700, 0}, {0,0}, {0,-5.9e10}, hex_color(COLOR_WHITE)};
-    
+
         bodies = new_darray_CBody(2);
         s+=darray_append_CBody(bodies, sun);
         s+=darray_append_CBody(bodies, mercury);
@@ -59,14 +59,14 @@ int main(int argc, const char * argv[]) {
         bodies = loadsystem(src);
         fclose(src);
     }
-    
+
     rungame(bodies);
-    
+
     const char *saveloc = !strcmp(argv[1], "demo") ? "system.sys" : argv[1];//If we started from a file, overwrite that file. Otherwise, save it as default.
-    
+
     FILE *sys = fopen(saveloc, "w");
     savesystem(bodies, sys);
     fclose(sys);
-    
+
     return 0;
 }
