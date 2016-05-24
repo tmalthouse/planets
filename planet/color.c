@@ -9,6 +9,11 @@
 #include "color.h"
 #include "debug.h"
 
+//Checks the endianness of the system. Returns 0 if big, 1 if little.
+int check_endianness () {
+    volatile uint32_t i = 0x000000FF;//Don't compile this away
+    return (*((uint8_t*)(&i)))==0xFF;
+}
 
 //For both these functions, we treat the hex value (a 32-bit uint) like an array of 4 8-bit values--a, b, g, r in that order.
 Color hex_color(uint32_t hex)
@@ -17,9 +22,15 @@ Color hex_color(uint32_t hex)
     Color result;
     uint8_t *hex_ptr = (uint8_t*)&hex;
     dprintf("%x\n", hex);
-    result.r = hex_ptr[3];
-    result.g = hex_ptr[2];
-    result.b = hex_ptr[1];
+    if (check_endianness()) {//If it's little endian (ie intel)
+        result.r = hex_ptr[2];
+        result.g = hex_ptr[1];
+        result.b = hex_ptr[0];
+    } else {
+        result.r = hex_ptr[1];
+        result.g = hex_ptr[2];
+        result.b = hex_ptr[3];
+    }
     return result;
 }
 
@@ -27,8 +38,14 @@ uint32_t color_hex(Color c)
 {
     uint32_t hex = 0;
     uint8_t *hex_ptr = (uint8_t*)&hex;
-    hex_ptr[1] = c.b;
-    hex_ptr[2] = c.g;
-    hex_ptr[3] = c.r;
+    if (check_endianness()) {//If it's little endian (ie intel)
+        hex_ptr[0] = c.b;
+        hex_ptr[1] = c.g;
+        hex_ptr[2] = c.r;
+    } else {
+        hex_ptr[3] = c.b;
+        hex_ptr[2] = c.g;
+        hex_ptr[1] = c.r;
+    }
     return hex;
 }
