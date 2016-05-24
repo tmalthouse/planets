@@ -35,7 +35,7 @@ int savesystem (Darray_CBody *bodies, FILE *dest)
 CBody loadbody (char *bodydef)
 {
     CBody result;
-    
+
     //Do the name
     char *name = strchr(bodydef, '=')+1;//Find the start of "name"
     char *nameend = strchr(bodydef+5, '\n');//Find the end of the string
@@ -43,43 +43,47 @@ CBody loadbody (char *bodydef)
     strncpy(result.name, name, nameend-name);
     result.name[nameend-name] = '\0';//We need to add the \0 ourselves, since the source string is terminated by \n
     dprintf("The name is %s\n", result.name);
-    
+
     //Do the mass
     char *mass = strchr(name+1, '=')+1;
     result.mass = atof(mass);
-    
+
     //Do the radius
     char *rad = strchr(mass+1, '=')+1;
     result.radius = atof(rad);
-    
+
     //Do the vel
     char *vel = strchr(rad+1, '=')+1;
     result.vel = atov2d(vel);
-    
+
     //Do the pos
     char *pos = strchr(vel+1, '=')+1;
     result.pos = atov2d(pos);
-    
+
     char *col = strchr(pos+1, '=')+1;
     result.color = hex_color(atoi(col));
-    
+
     return result;
 }
 
 Darray_CBody *loadsystem (FILE *src)
 {
     Darray_CBody *sys = new_darray_CBody(10);
-    
+
     //Find the size of the file in bytes
     fseek (src, 0L, SEEK_END);
     size_t size = ftell (src);
     rewind (src);
-    
+
     //Copy it to a buffer
     char *buf = calloc (size+1, sizeof(char));
-    fread(buf, sizeof(char), (int)size+1, src);
+    if (fread(buf, sizeof(char), (int)size+1, src)) {
+        fprintf(stderr, "Couldn't read the file!\n");
+        return NULL;
+    }
+
     buf[size] = '\0';//Since we use fread instead of fgets, we need to add the null ourselves
-    
+
     //Load bodies, delimiting on [ tokens
     char *body = strchr(buf, '[')+3;
     while (body!=NULL) {
@@ -88,11 +92,7 @@ Darray_CBody *loadsystem (FILE *src)
         dprintf("body is %d\t\n", body==NULL);
         body = strchr(body, '[');
     }
-    
+
     free(buf);
     return sys;
 }
-
-
-
-

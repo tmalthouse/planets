@@ -28,45 +28,45 @@ ScreenComponents video_init()
         return (ScreenComponents){false, NULL, NULL};
     }
     dprintf("Initialized video.\n");
-    
+
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
-    
+
     //Create a window
     SDL_Window *window = SDL_CreateWindow("planet", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                           SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-    
+
     if (window == NULL) {
         fprintf(stderr, "Couldn't create a window. Error: %s\n", SDL_GetError());
         return (ScreenComponents){false, NULL, NULL};
     }
-    
+
     //Set up a renderer system
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    
+
     if (renderer == NULL) {
         fprintf(stderr, "Couldn't create a renderer. Error: %s\n", SDL_GetError());
         return (ScreenComponents){false, window, NULL};
     }
-    
+
     //Give it whatever  this color is
     SDL_SetRenderDrawColor(renderer, 0x99, 0x99, 0x33, 0x55);
-    
+
     //Start the image subsystem
     int imgFlags = IMG_INIT_PNG;
     if(!( IMG_Init( imgFlags ) & imgFlags)) {
         fprintf(stderr, "Couldn't initialize SDL_Image. Error: %s\n", IMG_GetError());
         return (ScreenComponents){false, window, renderer};
     }
-    
+
     return (ScreenComponents){true, window, renderer};
-    
+
 }
 
 void closegame (ScreenComponents components)
 {
     SDL_DestroyRenderer(components.renderer);
     SDL_DestroyWindow(components.window);
-    
+
     IMG_Quit();
     SDL_Quit();
 }
@@ -74,7 +74,7 @@ void closegame (ScreenComponents components)
 int rungame(Darray_CBody *system)
 {
     int status = 0;
-    
+
     //Save the things from startup
     ScreenComponents components = video_init();
     if (components.status == false) {
@@ -82,22 +82,22 @@ int rungame(Darray_CBody *system)
         goto err;
     }
     dprintf("Components are good.\n");
-    
+
     //Load the dot texture for the celestial bodies
-    Texture *planettex = load_texture("/Users/Thomas/Desktop/planet.bmp", components.renderer);
+    Texture *planettex = load_texture("planet.bmp", components.renderer);
     if (planettex == NULL) {
         status--;
         goto err;
     }
-    
+
     bool quit = false;
     SDL_Event event;
-    
+
     //Prepare the solar system to be displayed
     Darray_PSprite *disp_system = new_darray_PSprite(system->len);
     PSprite *sprite = disp_system->data;
     CBody *body = system->data;
-    
+
     dprintf("Darray_PSprite *created. Initial len is %d, cap is %d\n.", disp_system->len, disp_system->cap);
     //Set the screen conversion factor
     Coordinate max = absmaxpos(system);
@@ -105,36 +105,36 @@ int rungame(Darray_CBody *system)
     
     //Start up the font for planet labels and message display
     TTF_Init();
-    TTF_Font *lbl_font = TTF_OpenFont("/Users/Thomas/Library/Fonts/Consolas.ttf", 12);
-    
+    TTF_Font *lbl_font = TTF_OpenFont("/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-B.ttf", 12);
+
     dprintf("Filling disp_system.\n");
     for (int i=0; i<system->len; i++) {
         //Set up the texture for each cbody
-        Texture *tex = load_texture("/Users/Thomas/Desktop/planet.bmp", components.renderer);
+        Texture *tex = load_texture("planet.bmp", components.renderer);
         texture_set_color(tex, body[i].color);
         darray_append_PSprite(disp_system, new_psprite(body+i, tex));
         dprintf("Filled index %d. Name is %s\n", i, sprite[i].rootbody->name);
-        
+
         //And create and save its label, in the same color as the body itself
         tex = create_label(body[i].name, body[i].color, lbl_font, components.renderer);
         disp_system->data[i].label = tex;
     }
-    
+
     dprintf("Len of disp_system is %d\n", disp_system->len);
-    
+
     //Set up the message system
-    TTF_Font *messagefont = TTF_OpenFont("/Users/Thomas/Library/Fonts/Consolas.ttf", 16);
+    TTF_Font *messagefont = TTF_OpenFont("/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-B.ttf", 16);
     Message m = new_message((Coordinate){360,80}, messagefont, components.renderer);
-    
+
     //Set up variables for the main game loop
     int counter = 0;
     int updates_per_frame = 20;
     bool paused = false;
     Timer framecontrol = new_timer();
-    
+
     while (!quit) {
         start_timer(&framecontrol);
-        
+
         //Check for events
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
@@ -200,14 +200,14 @@ int rungame(Darray_CBody *system)
                     break;//We're still in a switch statement here.
             }
         }
-        
+
         //Update the solar system by `updates_per_frame` timesteps
         vdprintf("Left event poll\n"); //Only update if we're not paused
         for (int i=0; i<updates_per_frame*!paused; i++) {
             cbody_update(system, ONE_DAY);
             counter++;
         }
-        
+
         //Move each sprite to its updated position
         for (int i=0; i<disp_system->len; i++) {
             vdprintf("Moving sprite %d\n", i);
@@ -215,32 +215,32 @@ int rungame(Darray_CBody *system)
             vdprintf("The actual coordinates of body %d are (%f, %f)\n", i, body[i].pos.x, body[i].pos.y);
             vdprintf("Its screen coordinates are (%f, %f)\n", sprite[i].screenpos.x, sprite[i].screenpos.y);
         }
-        
+
         //clear the screen
         SDL_SetRenderDrawColor(components.renderer, 0x00, 0x00, 0x00, 0x00);
         SDL_RenderClear(components.renderer);
-        
+
         //Render each planet dot
         for (int i=0; i<disp_system->len; i++) {
             psprite_render(sprite+i, components.renderer);
         }
-        
+
         //Get the mouse position, and render labels for any nearby dots
         int x, y;
         SDL_GetMouseState(&x, &y);
         render_labels(disp_system, (Coordinate){x, y}, components.renderer);
-        
+
         //Render the message, if it exists
         render_message(&m, SDL_GetTicks());
-        
+
         //Update the screen
         SDL_RenderPresent(components.renderer);
-        
+
         //Pause to stay under MAX_FPS
         if (get_time(&framecontrol) < 1000/MAX_FPS) {
             SDL_Delay((1000/MAX_FPS) - (uint32_t)get_time(&framecontrol));
         }
-        
+
         //Send a log message every orbit of the earth
         if (counter%365==0) {
             printf("Starting earth year %d.\n", counter/365);
@@ -249,13 +249,12 @@ int rungame(Darray_CBody *system)
     for (int i=0; i<disp_system->len; i++) {
         free(disp_system->data[i].texture);
         disp_system->data[i].texture = NULL;
-        
+
         free(disp_system->data[i].label);
         disp_system->data[i].label = NULL;
     }
     free_darray_PSprite(disp_system);
     disp_system = NULL;
-    
 
     
 err://We jump here if there's an error, but passing here DOES NOT mean an error occured.
