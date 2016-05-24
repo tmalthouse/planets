@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-O3 -std="c99"
+CFLAGS=-O0 -std="c99"
 LDFLAGS=-lSDL2 -lSDL2_ttf -lSDL2_image -lm
 
 SRCS=$(wildcard *.c)
@@ -12,3 +12,6 @@ OUTPUT=planet
 all: $(OBJS)
 	cd graphics; make
 	$(CC) $(OBJS) $(GRAPHICS_OBJS) $(CFLAGS) -o$(OUTPUT) $(LDFLAGS)
+
+clean:
+	rm -f *.o graphics/*.o

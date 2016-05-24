@@ -30,7 +30,7 @@ typedef enum {
     COLOR_GREEN = 0xFF2F7013,
     COLOR_BLUE  = 0xFF313b8F,
     COLOR_TEAL  = 0xFF008080
-} SimpleColor;
+} BasicColor;
 
 Color hex_color(uint32_t);
 uint32_t color_hex(Color c);
