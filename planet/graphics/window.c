@@ -18,40 +18,91 @@ int SCREEN_HEIGHT = 720;
 
 int MAX_FPS = 60;
 
+enum SC_Mode {
+    RETURN_COORD,
+    SCALE,
+    SET_COORD,
+    SC_SHIFT
+};
+
+static double calculate_ratio (Coordinate bottom_right, Coordinate top_left)
+{
+    double xratio = SCREEN_WIDTH/(bottom_right.x-top_left.x);
+    double yratio = SCREEN_HEIGHT/(bottom_right.y-top_left.y);
+    double ratio = (xratio < yratio)? yratio : xratio;//Set the ratio to the smaller of the two.
+    printf("ratio is %f\n", ratio);
+    return ratio;
+}
 
 /*!
  These crazy functions right here translate space coordinates (the ones found in CBody.pos) to pixel locations for the screen. Calling screencoord (coordinate) actually does the calculation, while screencoord_set(coord) changes the ratio so an item at maxcoord is at the top right corner of the screen in all future calls.
  */
 
 //Declared static so we don't pollute the namespace. This function should never be called directly, only through the wrappers below.
-static Vector2d sc_core (Vector2d spacecoord, Vector2d maxcoord) {
-    static long double ratio = NAN;//We want the ratio to persist over multiple calls--a bit like a closure but we only need one.
+static Vector2d sc_core (enum SC_Mode mode, Vector2d spacecoord, double factor, Coordinate tl, Coordinate br, int dx, int dy) {
+    static Coordinate top_left, bottom_right;
+    static double ratio;
     
-    if (!vect_eq(maxcoord, NULL_VECT)) {//The only time this bit should be called is if we're calling screencoord_set
-        long double xratio = SCREEN_WIDTH/(2*maxcoord.x);//0,0 is in the middle of the screen in space coordinates, but in the top left in screen coords.
-        long double yratio = SCREEN_HEIGHT/(2*maxcoord.y);
+    switch (mode) {
+        /*Handle setting coords (needs to be called at least once)*/
+        case SET_COORD:
+            top_left = tl;
+            bottom_right = br;
+            ratio = calculate_ratio(br, tl);
+            return NULL_VECT;
         
-        ratio = ((xratio<yratio)?xratio:yratio)*0.75;//Set the ratio to the smaller of the two, plus a bit of fudge factor.
-        dprintf("ratio set to %Lf \n", ratio);
-        return NULL_VECT;//This bit only gets called when wrappen in a void function anyways.
+        
+        /*Handle changing scaling factor*/
+        case SCALE:
+            dprintf("Scaling factor is %f\n", factor);
+            top_left = vfmult(top_left, factor);
+            bottom_right = vfmult(bottom_right, factor);
+            ratio = calculate_ratio(bottom_right, top_left);
+            return NULL_VECT;
+        
+        case SC_SHIFT:
+            {
+                double x = (double)dx/ratio;
+                double y = (double)dy/ratio;
+                top_left.x += x;
+                bottom_right.x += x;
+                top_left.y += y;
+                bottom_right.y += y;
+            }
+            break;
+        
+        case RETURN_COORD:
+            break;//We just want to fall through
+        default:
+            break;
+            
     }
     
-    //ratio = SCREEN_HEIGHT/1e12;
-    Vector2d screencoord = {((float)SCREEN_WIDTH/2)+spacecoord.x*ratio,
-        ((float)SCREEN_HEIGHT/2)+spacecoord.y*ratio};
+
     
+    Vector2d screencoord = {(spacecoord.x-top_left.x)*ratio, (spacecoord.y-top_left.y)*ratio};
     vdprintf("screen x: %f, screen y: %f\n", screencoord.x, screencoord.y);
+    
     return screencoord;
 }
 
 Vector2d screencoord (Vector2d spacecoord)
 {
-    return sc_core(spacecoord, NULL_VECT);
+    return sc_core(RETURN_COORD, spacecoord, NAN, NULL_VECT, NULL_VECT, 0, 0);
 }
 
-void screencoord_set (Vector2d absmax)
+void screencoord_zoom (double factor)
 {
-    dprintf("Setting max values for the screen size conversion. x=%f, y=%f\n",absmax.x, absmax.y);
-    sc_core(NULL_VECT, absmax);
+    dprintf("Scaling the screen by factor of %f\n", factor);
+    sc_core(SCALE, NULL_VECT, factor, NULL_VECT, NULL_VECT, 0, 0);
 }
 
+void screencoord_set (Coordinate top_left, Coordinate bottom_right)
+{
+    sc_core(SET_COORD, NULL_VECT, NAN, top_left, bottom_right, 0, 0);
+}
+
+void screencoord_shift (int x, int y)
+{
+    sc_core(SC_SHIFT, NULL_VECT, NAN, NULL_VECT, NULL_VECT, x, y);
+}
