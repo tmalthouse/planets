@@ -4,8 +4,8 @@ LDFLAGS=-lSDL2 -lSDL2_ttf -lSDL2_image -lm
 
 SRCS=$(wildcard *.c)
 OBJS=$(SRCS:.c=.o)
-
-GRAPHICS_OBJS=graphics/game.o graphics/message.o graphics/planet_sprite.o graphics/texture.o graphics/timer.o graphics/window.o
+GRAPHICS_SRCS=$(wildcard graphics/*.c)
+GRAPHICS_OBJS=$(GRAPHICS_SRCS:.c=.o)
 
 OUTPUT=planet
 
@@ -14,4 +14,4 @@ all: $(OBJS)
 	$(CC) $(OBJS) $(GRAPHICS_OBJS) $(CFLAGS) -o$(OUTPUT) $(LDFLAGS)
 
 clean:
-	rm -f *.o graphics/*.o
+	rm -f *.o *.gch graphics/*.o graphics/*.gch
