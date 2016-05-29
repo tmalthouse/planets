@@ -143,7 +143,7 @@ int rungame(Darray_CBody *system)
                 case SDL_MOUSEWHEEL:
                     {
                         double direction = (event.wheel.y > 0) ? 1 : -1;
-                        screencoord_zoom(1+((direction*4)/(MAX_FPS)));
+                        screencoord_zoom(direction);
                     }
                     break;
                 
@@ -167,7 +167,7 @@ int rungame(Darray_CBody *system)
                                 paused = !paused;
                                 break;
                             default:
-                                sprintf(tmp, " ");//Clear it out so we don't show some garbage message
+                                sprintf(tmp, " ");
                                 break;
                         }
                         update_message(&m, tmp, SDL_GetTicks());

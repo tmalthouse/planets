@@ -39,7 +39,7 @@ static double calculate_ratio (Coordinate bottom_left, Coordinate top_right)
  */
 
 //Declared static so we don't pollute the namespace. This function should never be called directly, only through the wrappers below.
-static Vector2d sc_core (enum SC_Mode mode, Vector2d spacecoord, double factor, Coordinate tr, Coordinate bl, int dx, int dy) {
+static Vector2d sc_core (enum SC_Mode mode, Vector2d spacecoord, double direction, Coordinate tr, Coordinate bl, int dx, int dy) {
     static Coordinate top_right, bottom_left;
     static long double ratio;
     
@@ -54,11 +54,17 @@ static Vector2d sc_core (enum SC_Mode mode, Vector2d spacecoord, double factor, 
         
         /*Handle changing scaling factor*/
         case SCALE:
-            dprintf("Scaling factor is %f\n", factor);
-            top_right = vfmult(top_right, factor);
-            bottom_left = vfmult(bottom_left, factor);
-            ratio = calculate_ratio(bottom_left, top_right);
+        {
+            ratio = direction>0?ratio*1.1:ratio/1.1;
+            Coordinate center = {(top_right.x + bottom_left.x)/2, (top_right.y+bottom_left.y)/2};
+            
+            double newx = (top_right.x-center.x)*ratio;
+            double newy = (top_right.y-center.y)*ratio;
+            
+            top_right = (Coordinate){center.x+newx, center.y+newy};
+            bottom_left = (Coordinate){center.x-newx, center.y-newy};
             return NULL_VECT;
+        }
         
         case SC_SHIFT:
             {
@@ -80,21 +86,22 @@ static Vector2d sc_core (enum SC_Mode mode, Vector2d spacecoord, double factor, 
     
 
     
-    Vector2d screencoord = {(spacecoord.x-bottom_left.x)*ratio + SCREEN_WIDTH/2, (top_right.y-spacecoord.y)*ratio};
+    Vector2d screencoord = {(spacecoord.x-bottom_left.x)*ratio + SCREEN_WIDTH/2, (top_right.y-spacecoord.y)*ratio + SCREEN_HEIGHT/2};
     vdprintf("screen x: %f, screen y: %f\n", screencoord.x, screencoord.y);
     
     return screencoord;
 }
+
+
 
 Vector2d screencoord (Vector2d spacecoord)
 {
     return sc_core(RETURN_COORD, spacecoord, NAN, NULL_VECT, NULL_VECT, 0, 0);
 }
 
-void screencoord_zoom (double factor)
+void screencoord_zoom (double direction)
 {
-    dprintf("Scaling the screen by factor of %f\n", factor);
-    sc_core(SCALE, NULL_VECT, factor, NULL_VECT, NULL_VECT, 0, 0);
+    sc_core(SCALE, NULL_VECT, direction, NULL_VECT, NULL_VECT, 0, 0);
 }
 
 void screencoord_set (Coordinate top_right, Coordinate bottom_left)
