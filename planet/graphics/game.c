@@ -83,13 +83,6 @@ int rungame(Darray_CBody *system)
     }
     dprintf("Components are good.\n");
 
-    //Load the dot texture for the celestial bodies
-    Texture *planettex = load_texture("planet.bmp", components.renderer);
-    if (planettex == NULL) {
-        status--;
-        goto err;
-    }
-
     bool quit = false;
     SDL_Event event;
 
@@ -99,18 +92,23 @@ int rungame(Darray_CBody *system)
     CBody *body = system->data;
 
     dprintf("Darray_PSprite *created. Initial len is %d, cap is %d\n.", disp_system->len, disp_system->cap);
+    
+    
     //Set the screen conversion factor
     Coordinate max = absmaxpos(system);
-    screencoord_set(vfmult(max, -1), max);
+    dprintf("x=%f, y=%f\n", max.x,  max.y);
+    screencoord_set(max, vfmult(max, -1));
+    
+    
     
     //Start up the font for planet labels and message display
     TTF_Init();
-    TTF_Font *lbl_font = TTF_OpenFont("/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-B.ttf", 12);
+    TTF_Font *lbl_font = TTF_OpenFont("/Library/Fonts/AppleGothic.ttf", 12);
 
     dprintf("Filling disp_system.\n");
     for (int i=0; i<system->len; i++) {
         //Set up the texture for each cbody
-        Texture *tex = load_texture("planet.bmp", components.renderer);
+        Texture *tex = load_texture("/Users/Thomas/Desktop/planet.bmp", components.renderer);
         texture_set_color(tex, body[i].color);
         darray_append_PSprite(disp_system, new_psprite(body+i, tex));
         dprintf("Filled index %d. Name is %s\n", i, sprite[i].rootbody->name);
@@ -123,7 +121,7 @@ int rungame(Darray_CBody *system)
     dprintf("Len of disp_system is %d\n", disp_system->len);
 
     //Set up the message system
-    TTF_Font *messagefont = TTF_OpenFont("/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-B.ttf", 16);
+    TTF_Font *messagefont = TTF_OpenFont("/Library/Fonts/AppleGothic.ttf", 16);
     Message m = new_message((Coordinate){360,80}, messagefont, components.renderer);
 
     //Set up variables for the main game loop
@@ -145,7 +143,7 @@ int rungame(Darray_CBody *system)
                 case SDL_MOUSEWHEEL:
                     {
                         double direction = (event.wheel.y > 0) ? 1 : -1;
-                        screencoord_zoom(1+((direction*4)/MAX_FPS));
+                        screencoord_zoom(1+((direction*4)/(MAX_FPS)));
                     }
                     break;
                 
@@ -155,12 +153,12 @@ int rungame(Darray_CBody *system)
                         char tmp[50];
                         switch (event.key.keysym.sym) {
                             case SDLK_PERIOD://Increase time speed
-                                updates_per_frame+=10;
+                                updates_per_frame*=2;
                                 sprintf(tmp, "Timewarp: %dx", updates_per_frame/10);
                                 break;
                             case SDLK_COMMA://Decrease time speed, up to 0
-                                if (updates_per_frame>=10) {
-                                    updates_per_frame-=10;
+                                if (updates_per_frame>1) {
+                                    updates_per_frame/=2;
                                     sprintf(tmp, "Timewarp: %dx", updates_per_frame/10);
                                 }
                                 break;
@@ -204,7 +202,7 @@ int rungame(Darray_CBody *system)
         //Update the solar system by `updates_per_frame` timesteps
         vdprintf("Left event poll\n"); //Only update if we're not paused
         for (int i=0; i<updates_per_frame*!paused; i++) {
-            cbody_update(system, ONE_DAY);
+            cbody_update(system, ONE_HOUR);
             counter++;
         }
 
@@ -223,6 +221,7 @@ int rungame(Darray_CBody *system)
         //Render each planet dot
         for (int i=0; i<disp_system->len; i++) {
             psprite_render(sprite+i, components.renderer);
+            vdprintf("rendering body %s at screencoord (%f, %f)\n", (sprite+i)->rootbody->name, (sprite+i)->screenpos.x, (sprite+i)->screenpos.y);
         }
 
         //Get the mouse position, and render labels for any nearby dots
