@@ -153,12 +153,12 @@ int rungame(Darray_CBody *system)
                         char tmp[50];
                         switch (event.key.keysym.sym) {
                             case SDLK_PERIOD://Increase time speed
-                                updates_per_frame*=2;
+                                updates_per_frame+=10;
                                 sprintf(tmp, "Timewarp: %dx", updates_per_frame/10);
                                 break;
                             case SDLK_COMMA://Decrease time speed, up to 0
                                 if (updates_per_frame>1) {
-                                    updates_per_frame/=2;
+                                    updates_per_frame-=10;
                                     sprintf(tmp, "Timewarp: %dx", updates_per_frame/10);
                                 }
                                 break;

@@ -39,7 +39,8 @@ static double calculate_ratio (Coordinate bottom_left, Coordinate top_right)
  */
 
 //Declared static so we don't pollute the namespace. This function should never be called directly, only through the wrappers below.
-static Vector2d sc_core (enum SC_Mode mode, Vector2d spacecoord, double direction, Coordinate tr, Coordinate bl, int dx, int dy) {
+static Vector2d sc_core (enum SC_Mode mode, Vector2d spacecoord, double direction, Coordinate tr, Coordinate bl, int dx, int dy)
+{
     static Coordinate top_right, bottom_left;
     static long double ratio;
     
@@ -55,7 +56,7 @@ static Vector2d sc_core (enum SC_Mode mode, Vector2d spacecoord, double directio
         /*Handle changing scaling factor*/
         case SCALE:
         {
-            ratio = direction>0?ratio*1.1:ratio/1.1;
+            ratio = direction>0?ratio*1.2:ratio/1.2;
             Coordinate center = {(top_right.x + bottom_left.x)/2, (top_right.y+bottom_left.y)/2};
             
             double newx = (top_right.x-center.x)*ratio;

@@ -25,7 +25,7 @@ int savesystem (Darray_CBody *bodies, FILE *dest)
         fprintf(dest, "\tRADIUS=%f\n", sys[i].radius);
         fprintf(dest, "\tVEL={%f,%f}\n", sys[i].vel.x, sys[i].vel.y);
         fprintf(dest, "\tPOS={%f,%f}\n", sys[i].pos.x, sys[i].pos.y);
-        fprintf(dest, "\tCOLOR=%d\n", color_hex(sys[i].color));
+        fprintf(dest, "\tCOLOR=%d\n", color_to_hex(sys[i].color));
         fprintf(dest, "]\n");
         //We don't bother saving force because that's recalculated on load anyways.
     }
@@ -61,7 +61,7 @@ CBody loadbody (char *bodydef)
     result.pos = atov2d(pos);
 
     char *col = strchr(pos+1, '=')+1;
-    result.color = hex_color(atoi(col));
+    result.color = hex_to_color(atoi(col));
 
     return result;
 }
