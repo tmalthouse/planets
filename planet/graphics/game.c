@@ -19,6 +19,7 @@
 #include "../darray_types.h"
 #include "../cbody.h"
 #include "../planet.h"
+#include "../settings.h"
 
 ScreenComponents video_init()
 {
@@ -92,23 +93,30 @@ int rungame(Darray_CBody *system)
     CBody *body = system->data;
 
     dprintf("Darray_PSprite *created. Initial len is %d, cap is %d\n.", disp_system->len, disp_system->cap);
-    
-    
+
+
     //Set the screen conversion factor
     Coordinate max = absmaxpos(system);
     dprintf("x=%f, y=%f\n", max.x,  max.y);
     screencoord_set(max, vfmult(max, -1));
-    
-    
-    
+
+
+
     //Start up the font for planet labels and message display
     TTF_Init();
-    TTF_Font *lbl_font = TTF_OpenFont("/Library/Fonts/AppleGothic.ttf", 12);
+    TTF_Font *lbl_font = TTF_OpenFont(FONT_PATH, 12);
+    if (lbl_font == NULL) {
+        goto err;
+    }
 
     dprintf("Filling disp_system.\n");
     for (int i=0; i<system->len; i++) {
         //Set up the texture for each cbody
-        Texture *tex = load_texture("/Users/Thomas/Desktop/planet.bmp", components.renderer);
+        Texture *tex = load_texture(SPRITE_PATH, components.renderer);
+        if (tex == NULL) {
+            goto err;
+        }
+
         texture_set_color(tex, body[i].color);
         darray_append_PSprite(disp_system, new_psprite(body+i, tex));
         dprintf("Filled index %d. Name is %s\n", i, sprite[i].rootbody->name);
@@ -121,7 +129,10 @@ int rungame(Darray_CBody *system)
     dprintf("Len of disp_system is %d\n", disp_system->len);
 
     //Set up the message system
-    TTF_Font *messagefont = TTF_OpenFont("/Library/Fonts/AppleGothic.ttf", 16);
+    TTF_Font *messagefont = TTF_OpenFont(FONT_PATH, 16);
+    if (messagefont == NULL) {
+        goto err;
+    }
     Message m = new_message((Coordinate){360,80}, messagefont, components.renderer);
 
     //Set up variables for the main game loop
@@ -139,14 +150,14 @@ int rungame(Darray_CBody *system)
                 case SDL_QUIT:
                     quit = true;
                     break;
-                
+
                 case SDL_MOUSEWHEEL:
                     {
                         double direction = (event.wheel.y > 0) ? 1 : -1;
                         screencoord_zoom(direction);
                     }
                     break;
-                
+
                 case SDL_KEYDOWN:
                     {
                         //First, we handle keys that display a message (tw related stuff)
@@ -173,24 +184,24 @@ int rungame(Darray_CBody *system)
                         update_message(&m, tmp, SDL_GetTicks());
                         dprintf("Updates per frame: %d\n", updates_per_frame);
                     }
-                    
+
                     {
                         switch (event.key.keysym.sym) {
                             case SDLK_RIGHT:
                                 screencoord_shift(10, 0);
                                 break;
-                            
+
                             case SDLK_LEFT:
                                 screencoord_shift(-10, 0);
                                 break;
-                            
+
                             case SDLK_UP:
                                 screencoord_shift(0, 10);
                                 break;
-                            
+
                             case SDLK_DOWN:
                                 screencoord_shift(0, -10);
-                                
+
                             default:
                                 break;
                         }
@@ -255,9 +266,9 @@ int rungame(Darray_CBody *system)
     free_darray_PSprite(disp_system);
     disp_system = NULL;
 
-    
+
 err://We jump here if there's an error, but passing here DOES NOT mean an error occured.
-    
+
     closegame(components);
     return status;
 }
