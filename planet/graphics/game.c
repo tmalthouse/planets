@@ -19,8 +19,9 @@
 #include "../darray_types.h"
 #include "../cbody.h"
 #include "../planet.h"
+#include "../settings.h"
 
-ScreenComponents startgame()
+ScreenComponents video_init()
 {
     //Start the video subsystem
     if (SDL_Init(SDL_INIT_VIDEO)) {
@@ -76,19 +77,12 @@ int rungame(Darray_CBody *system)
     int status = 0;
 
     //Save the things from startup
-    ScreenComponents components = startgame();
+    ScreenComponents components = video_init();
     if (components.status == false) {
         status--;
         goto err;
     }
     dprintf("Components are good.\n");
-
-    //Load the dot texture for the celestial bodies
-    Texture *planettex = load_texture("planet.bmp", components.renderer);
-    if (planettex == NULL) {
-        status--;
-        goto err;
-    }
 
     bool quit = false;
     SDL_Event event;
@@ -99,17 +93,30 @@ int rungame(Darray_CBody *system)
     CBody *body = system->data;
 
     dprintf("Darray_PSprite *created. Initial len is %d, cap is %d\n.", disp_system->len, disp_system->cap);
+
+
     //Set the screen conversion factor
-    screencoord_set(absmaxpos(system));
+    Coordinate max = absmaxpos(system);
+    dprintf("x=%f, y=%f\n", max.x,  max.y);
+    screencoord_set(max, vfmult(max, -1));
+
+
 
     //Start up the font for planet labels and message display
     TTF_Init();
-    TTF_Font *lbl_font = TTF_OpenFont("/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-B.ttf", 12);
+    TTF_Font *lbl_font = TTF_OpenFont(FONT_PATH, 12);
+    if (lbl_font == NULL) {
+        goto err;
+    }
 
     dprintf("Filling disp_system.\n");
     for (int i=0; i<system->len; i++) {
         //Set up the texture for each cbody
-        Texture *tex = load_texture("planet.bmp", components.renderer);
+        Texture *tex = load_texture(SPRITE_PATH, components.renderer);
+        if (tex == NULL) {
+            goto err;
+        }
+
         texture_set_color(tex, body[i].color);
         darray_append_PSprite(disp_system, new_psprite(body+i, tex));
         dprintf("Filled index %d. Name is %s\n", i, sprite[i].rootbody->name);
@@ -122,7 +129,10 @@ int rungame(Darray_CBody *system)
     dprintf("Len of disp_system is %d\n", disp_system->len);
 
     //Set up the message system
-    TTF_Font *messagefont = TTF_OpenFont("/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-B.ttf", 16);
+    TTF_Font *messagefont = TTF_OpenFont(FONT_PATH, 16);
+    if (messagefont == NULL) {
+        goto err;
+    }
     Message m = new_message((Coordinate){360,80}, messagefont, components.renderer);
 
     //Set up variables for the main game loop
@@ -136,39 +146,74 @@ int rungame(Darray_CBody *system)
 
         //Check for events
         while (SDL_PollEvent(&event)) {
-            //If the user wants to quit
-            if (event.type == SDL_QUIT) {
-                quit = true;
-            } else if (event.type == SDL_KEYDOWN) {
-                char tmp[50];
-                switch (event.key.keysym.sym) {
-                    case SDLK_PERIOD://Increase time speed
-                        updates_per_frame+=10;
-                        sprintf(tmp, "Timewarp: %dx", updates_per_frame/10);
-                        break;
-                    case SDLK_COMMA://Decrease time speed, up to 0
-                        if (updates_per_frame>=10) {
-                            updates_per_frame-=10;
-                            sprintf(tmp, "Timewarp: %dx", updates_per_frame/10);
+            switch (event.type) {
+                case SDL_QUIT:
+                    quit = true;
+                    break;
+
+                case SDL_MOUSEWHEEL:
+                    {
+                        double direction = (event.wheel.y > 0) ? 1 : -1;
+                        screencoord_zoom(direction);
+                    }
+                    break;
+
+                case SDL_KEYDOWN:
+                    {
+                        //First, we handle keys that display a message (tw related stuff)
+                        char tmp[50];
+                        switch (event.key.keysym.sym) {
+                            case SDLK_PERIOD://Increase time speed
+                                updates_per_frame+=10;
+                                sprintf(tmp, "Timewarp: %dx", updates_per_frame/10);
+                                break;
+                            case SDLK_COMMA://Decrease time speed, up to 0
+                                if (updates_per_frame>1) {
+                                    updates_per_frame-=10;
+                                    sprintf(tmp, "Timewarp: %dx", updates_per_frame/10);
+                                }
+                                break;
+                            case SDLK_ESCAPE://Pause the game
+                                sprintf(tmp, "Game %s", paused?"unpaused":"paused");
+                                paused = !paused;
+                                break;
+                            default:
+                                sprintf(tmp, " ");
+                                break;
                         }
-                        break;
-                    case SDLK_ESCAPE://Pause the game
-                        sprintf(tmp, "Game %s", paused?"unpaused":"paused");
-                        paused = !paused;
-                        break;
-                    default:
-                        sprintf(tmp, " ");//Clear it out so we don't show some garbage message
-                        break;
-                }
-                update_message(&m, tmp, SDL_GetTicks());
-                dprintf("Updates per frame: %d\n", updates_per_frame);
+                        update_message(&m, tmp, SDL_GetTicks());
+                        dprintf("Updates per frame: %d\n", updates_per_frame);
+                    }
+
+                    {
+                        switch (event.key.keysym.sym) {
+                            case SDLK_RIGHT:
+                                screencoord_shift(10, 0);
+                                break;
+
+                            case SDLK_LEFT:
+                                screencoord_shift(-10, 0);
+                                break;
+
+                            case SDLK_UP:
+                                screencoord_shift(0, 10);
+                                break;
+
+                            case SDLK_DOWN:
+                                screencoord_shift(0, -10);
+
+                            default:
+                                break;
+                        }
+                    }
+                    break;//We're still in a switch statement here.
             }
         }
 
         //Update the solar system by `updates_per_frame` timesteps
         vdprintf("Left event poll\n"); //Only update if we're not paused
         for (int i=0; i<updates_per_frame*!paused; i++) {
-            cbody_update(system, ONE_DAY);
+            cbody_update(system, ONE_HOUR);
             counter++;
         }
 
@@ -187,6 +232,7 @@ int rungame(Darray_CBody *system)
         //Render each planet dot
         for (int i=0; i<disp_system->len; i++) {
             psprite_render(sprite+i, components.renderer);
+            vdprintf("rendering body %s at screencoord (%f, %f)\n", (sprite+i)->rootbody->name, (sprite+i)->screenpos.x, (sprite+i)->screenpos.y);
         }
 
         //Get the mouse position, and render labels for any nearby dots
@@ -221,8 +267,7 @@ int rungame(Darray_CBody *system)
     disp_system = NULL;
 
 
-
-    err://We jump here if there's an error, but passing here DOES NOT mean an error occured.
+err://We jump here if there's an error, but passing here DOES NOT mean an error occured.
 
     closegame(components);
     return status;

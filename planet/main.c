@@ -25,17 +25,17 @@ int main(int argc, const char * argv[]) {
     Darray_CBody *bodies;
     int s = 0;
     if (!strcmp(argv[1], "demo")) {
-        CBody sun = {"Sun", 1.988e30, 1, {20.0,0.0}, {0,0}, {0,0}, hex_color(COLOR_YELLOW)};
-        CBody mercury = {"Mercury", 3.3e23, 1, {47362, 0}, {0,0}, {0,-5.7e10}, hex_color(COLOR_GRAY)};
-        CBody venus = {"Venus", 4.87e24, 1, {0, 35002}, {0,0}, {1.08e11, 0}, hex_color(COLOR_ORANGE)};
-        CBody earth = {"Earth", 5.97e24, 1, {-29780, 0}, {0,0}, {0, 1.49e11}, hex_color(COLOR_BLUE)};
-        CBody mars = {"Mars", 6.42e23, 1, {0, -24000}, {0,0}, {-2.27e11, 0}, hex_color(COLOR_RED)};
-        CBody jupiter = {"Jupiter", 1.89e27, 1, {-13070, 0}, {0,0}, {0, 7.41e11}, hex_color(COLOR_ORANGE)};
-        CBody saturn = {"Saturn", 5.68e26, 1, {9690, 0}, {}, {0,-1.509e12}, hex_color(COLOR_YELLOW)};
-        CBody uranus = {"Uranus", 8.68e25, 1, {6800, 0}, {}, {0,-2.875e12}, hex_color(COLOR_TEAL)};
-        CBody neptune = {"Neptune", 1.02e26, 1, {5430, 0}, {}, {0,-4.504e12}, hex_color(COLOR_BLUE)};
-        CBody pluto = {"Pluto", 1.3e23, 1, {6100, 0}, {}, {0,-4.436e12}, hex_color(COLOR_GRAY)};
-        CBody comet = {"Comet", 3.3e10, 1, {66700, 0}, {0,0}, {0,-5.9e10}, hex_color(COLOR_WHITE)};
+        CBody sun = {"Sun", 1.988e30, 1, {20.0,0.0}, {0,0}, {0,0}, hex_to_color(COLOR_YELLOW)};
+        CBody mercury = {"Mercury", 3.3e23, 1, {47362, 0}, {0,0}, {0,-5.7e10}, hex_to_color(COLOR_GRAY)};
+        CBody venus = {"Venus", 4.87e24, 1, {0, 35002}, {0,0}, {1.08e11, 0}, hex_to_color(COLOR_ORANGE)};
+        CBody earth = {"Earth", 5.97e24, 1, {-29780, 0}, {0,0}, {0, 1.49e11}, hex_to_color(COLOR_BLUE)};
+        CBody mars = {"Mars", 6.42e23, 1, {0, -24000}, {0,0}, {-2.27e11, 0}, hex_to_color(COLOR_RED)};
+        CBody jupiter = {"Jupiter", 1.89e27, 1, {-13070, 0}, {0,0}, {0, 7.41e11}, hex_to_color(COLOR_ORANGE)};
+        CBody saturn = {"Saturn", 5.68e26, 1, {9690, 0}, {}, {0,-1.509e12}, hex_to_color(COLOR_YELLOW)};
+        CBody uranus = {"Uranus", 8.68e25, 1, {6800, 0}, {}, {0,-2.875e12}, hex_to_color(COLOR_TEAL)};
+        CBody neptune = {"Neptune", 1.02e26, 1, {5430, 0}, {}, {0,-4.504e12}, hex_to_color(COLOR_BLUE)};
+        CBody pluto = {"Pluto", 1.3e23, 1, {6100, 0}, {}, {0,-4.436e12}, hex_to_color(COLOR_GRAY)};
+        CBody comet = {"Comet", 3.3e10, 1, {66700, 0}, {0,0}, {0,-5.9e10}, hex_to_color(COLOR_WHITE)};
 
         bodies = new_darray_CBody(2);
         s+=darray_append_CBody(bodies, sun);

@@ -7,7 +7,9 @@
 #include "darray_types.h"
 
 #define BIG_G (6.67e-11)
-#define ONE_DAY (60*24*24)
+#define ONE_HOUR (60*60)
+#define ONE_DAY (ONE_HOUR*24)
+
 
 
 /*cbody function headers*/
