@@ -72,6 +72,51 @@ void closegame (ScreenComponents components)
     SDL_Quit();
 }
 
+void set_screen_conversion_factor(Darray_CBody *system)
+{
+    //Set the screen conversion factor
+    Coordinate max = absmaxpos(system);
+    dprintf("x=%f, y=%f\n", max.x,  max.y);
+    screencoord_set(max, vfmult(max, -1));
+}
+
+int create_planet_textures(Darray_PSprite *disp_system, ScreenComponents components, TTF_Font *lbl_font, Darray_CBody *system)
+{
+    CBody *body = system->data;
+    PSprite *sprite = disp_system->data;
+    
+    dprintf("Filling disp_system.\n");
+    for (int i=0; i<system->len; i++) {
+        //Set up the texture for each cbody
+        Texture *tex = load_texture(SPRITE_PATH, components.renderer);
+        if (tex == NULL) {
+            return -1;
+        }
+        
+        texture_set_color(tex, body[i].color);
+        darray_append_PSprite(disp_system, new_psprite(body+i, tex));
+        dprintf("Filled index %d. Name is %s\n", i, sprite[i].rootbody->name);
+        
+        //And create and save its label, in the same color as the body itself
+        tex = create_label(body[i].name, body[i].color, lbl_font, components.renderer);
+        disp_system->data[i].label = tex;
+    }
+    
+    dprintf("Len of disp_system is %d\n", disp_system->len);
+    return 0;
+}
+
+TTF_Font * create_lbl_font(void)
+{
+    //Start up the font for planet labels and message display
+    TTF_Init();
+    TTF_Font *lbl_font = TTF_OpenFont(FONT_PATH, 12);
+    if (lbl_font == NULL) {
+        goto err;
+    }
+    return lbl_font;
+}
+
 int rungame(Darray_CBody *system)
 {
     int status = 0;
@@ -89,45 +134,21 @@ int rungame(Darray_CBody *system)
 
     //Prepare the solar system to be displayed
     Darray_PSprite *disp_system = new_darray_PSprite(system->len);
-    PSprite *sprite = disp_system->data;
-    CBody *body = system->data;
 
     dprintf("Darray_PSprite *created. Initial len is %d, cap is %d\n.", disp_system->len, disp_system->cap);
 
 
-    //Set the screen conversion factor
-    Coordinate max = absmaxpos(system);
-    dprintf("x=%f, y=%f\n", max.x,  max.y);
-    screencoord_set(max, vfmult(max, -1));
+    set_screen_conversion_factor(system);
 
 
 
-    //Start up the font for planet labels and message display
-    TTF_Init();
-    TTF_Font *lbl_font = TTF_OpenFont(FONT_PATH, 12);
+    TTF_Font *lbl_font = create_lbl_font();
     if (lbl_font == NULL) {
         goto err;
     }
 
-    dprintf("Filling disp_system.\n");
-    for (int i=0; i<system->len; i++) {
-        //Set up the texture for each cbody
-        Texture *tex = load_texture(SPRITE_PATH, components.renderer);
-        if (tex == NULL) {
-            goto err;
-        }
-
-        texture_set_color(tex, body[i].color);
-        darray_append_PSprite(disp_system, new_psprite(body+i, tex));
-        dprintf("Filled index %d. Name is %s\n", i, sprite[i].rootbody->name);
-
-        //And create and save its label, in the same color as the body itself
-        tex = create_label(body[i].name, body[i].color, lbl_font, components.renderer);
-        disp_system->data[i].label = tex;
-    }
-
-    dprintf("Len of disp_system is %d\n", disp_system->len);
-
+    create_planet_textures(disp_system, components, lbl_font, system);
+    
     //Set up the message system
     TTF_Font *messagefont = TTF_OpenFont(FONT_PATH, 16);
     if (messagefont == NULL) {
@@ -218,6 +239,7 @@ int rungame(Darray_CBody *system)
         }
 
         //Move each sprite to its updated position
+        PSprite *sprite = disp_system->data;
         for (int i=0; i<disp_system->len; i++) {
             vdprintf("Moving sprite %d\n", i);
             psprite_update(sprite+i);
@@ -256,6 +278,7 @@ int rungame(Darray_CBody *system)
             printf("Starting earth year %d.\n", counter/365);
         }
     }
+    
     for (int i=0; i<disp_system->len; i++) {
         free(disp_system->data[i].texture);
         disp_system->data[i].texture = NULL;
@@ -263,6 +286,7 @@ int rungame(Darray_CBody *system)
         free(disp_system->data[i].label);
         disp_system->data[i].label = NULL;
     }
+    
     free_darray_PSprite(disp_system);
     disp_system = NULL;
 
