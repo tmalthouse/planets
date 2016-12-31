@@ -1,6 +1,6 @@
 # planets
 
-**This is old and buggy! Take a look at [github.com/tmalthouse/trajectory]() instead!**
+**This is old and buggy! Take a look at [github.com/tmalthouse/trajectory](https://github.com/tmalthouse/trajectory) instead!**
 
 A SDL-based nbody simulator with timewarp and savefile loading (you can save a system or edit it in a text editor.)
 
