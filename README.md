@@ -1,4 +1,7 @@
 # planets
+
+**This is old and buggy! Take a look at [github.com/tmalthouse/trajectory]() instead!**
+
 A SDL-based nbody simulator with timewarp and savefile loading (you can save a system or edit it in a text editor.)
 
 It's still very much a WIP, with a ton of things that still need to be added/changed.
